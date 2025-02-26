@@ -1,7 +1,5 @@
 import React from 'react'
-import User from './User';
-import Babu from './Babu';
-import Admin from './Admin';
+
 import Link from 'next/link';
 
 function Navbar() {
@@ -12,13 +10,13 @@ function Navbar() {
         <h1 className='text-xl font-semibold mt-4'>Dashboard</h1></Link>
         </div>
         <div className='flex   space-x-16 mt-4'>
-        <Link href=''>
+        <Link href="/User">
               <p>User</p>
         </Link>
-        <Link href=''>
+        <Link href="/Babu">
               <p>Babu</p>
         </Link>
-        <Link href=''>
+        <Link href="/Admin">
               <p>Admin</p>
         </Link>
          
