@@ -1,4 +1,5 @@
-import React from 'react'
+'use client'
+import {useState} from 'react'
 import Navbar from '@/components/Navbar'
 import {
   Tabs,
@@ -7,11 +8,24 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
-import Form from "@/components/ui/form"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 
 
 
 function User() {
+const [open, setOpen] = useState(false);
+  const [formData, setFormData] = useState({ username: "", mobile: "" });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    console.log("Form Data:", formData);
+    setOpen(false); // Close modal after submit
+  };
   return (
     <div>
         <Navbar/>
@@ -24,31 +38,68 @@ function User() {
   </TabsList>
   <TabsContent value="account">
     <ul>
-      <li >Rent Agreement
-        <span className='ml-8'>
-              <Button variant="outline">Apply</Button>
-        </span>
+    <li>
+      Rent Agreement
+      <span className="ml-8">
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Apply
+        </Button>
+      </span>
+  </li>
+  <li>
+      Allownace Agreement
+      <span className="ml-8">
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Apply
+        </Button>
+      </span>
+  </li>
+  <li>
+    House Agreement
+      <span className="ml-8">
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Apply
+        </Button>
+      </span>
+  </li>
+  <li>
+    Challen Agreement
+      <span className="ml-8">
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Apply
+        </Button>
+      </span>
+  </li>
+  
 
-      </li>
-      <li >Rent Agreement
-        <span className='ml-8'>
-              <Button variant="outline">Apply</Button>
-        </span>
+      {/* Modal */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Apply for Rent Agreement</DialogTitle>
+          </DialogHeader>
 
-      </li>
-      <li >Rent Agreement
-        <span className='ml-8'>
-              <Button variant="outline">Apply</Button>
-        </span>
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="username">Username</Label>
+              <Input id="username" name="username"  type='text' value={formData.username} onChange={handleChange} placeholder="Enter your name" />
+            </div>
 
-      </li>
-      <li >Rent Agreement
-        <span className='ml-8'>
-              <Button variant="outline">Apply</Button>
-                <Form/>
-        </span>
+            <div>
+              <Label htmlFor="mobile">Mobile No.</Label>
+              <Input id="mobile" name="mobile" type='number' value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" />
+            </div>
+          </div>
 
-      </li>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleSubmit}>Submit</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    
 
     </ul>
   </TabsContent>
