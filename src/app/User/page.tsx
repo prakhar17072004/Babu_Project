@@ -13,6 +13,7 @@ function User() {
   const [open, setOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [formData, setFormData] = useState({ username: "", mobile: "" });
+  const [appliedServices, setAppliedServices] = useState<string[]>([]);
 
   // List of services
   const services = [
@@ -47,6 +48,12 @@ function User() {
     }
 
     toast.success(`${selectedService} Form submitted successfully!`);
+    
+    // Store the submitted service
+    if (selectedService) {
+      setAppliedServices((prev) => [...prev, selectedService]);
+    }
+
     resetForm();
     setOpen(false);
   };
@@ -60,37 +67,53 @@ function User() {
     <div>
       <Navbar />
       <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
-        <h1 className="text-3xl font-bold mb-6 ">User Services</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center">User Services</h1>
 
         {/* Tabs for Services */}
         <Tabs defaultValue="services-avail">
-          <TabsList >
+          <TabsList className=" bg-white p-2 rounded-lg shadow-md">
             <TabsTrigger value="services-avail">Services Available</TabsTrigger>
-            <TabsTrigger value="services-apply">Apply Services</TabsTrigger>
+            <TabsTrigger value="services-apply">Applied Services</TabsTrigger>
           </TabsList>
 
           {/* Available Services List */}
           <TabsContent value="services-avail">
             
-            <ul className="space-y-4">
-              {services.map((service, index) => (
-                <li key={index} className="flex justify-between items-center bg-white p-4 shadow rounded-lg">
-                  <span className="font-semibold">{service}</span>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setSelectedService(service);
-                      setOpen(true);
-                    }}
-                  >
-                    Apply
-                  </Button>
-                </li>
-              ))}
-            </ul>
+              <ul className="space-y-4">
+                {services.map((service, index) => (
+                  <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+                    <span className="font-semibold">{service}</span>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setSelectedService(service);
+                        setOpen(true);
+                      }}
+                    >
+                      Apply
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            
           </TabsContent>
 
-          <TabsContent value="services-apply">Change your password here.</TabsContent>
+          {/* Applied Services List */}
+          <TabsContent value="services-apply">
+            
+              {appliedServices.length > 0 ? (
+                <ul className="space-y-4">
+                  {appliedServices.map((service, index) => (
+                    <li key={index} className=" flex justify-between items-center bg-green-100 p-4 rounded-lg shadow text-center font-semibold">
+                      {service} - Applied
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 text-center">No services applied yet.</p>
+              )}
+            
+          </TabsContent>
         </Tabs>
       </div>
 
