@@ -21,10 +21,9 @@ function User() {
     "House Agreement",
     "Challan Agreement",
     "Property Agreement",
-    "Property Agreement",
-    "Property Agreement",
-    "Property Agreement",
-    "Property Agreement"
+    "Vehicle Lease",
+    "Employment Contract",
+    "Business Agreement",
   ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,18 +59,19 @@ function User() {
   return (
     <div>
       <Navbar />
-      <div className="min-h-screen bg-gray-50 p-8">
-        <h1 className="text-3xl font-bold mb-6">User Services</h1>
+      <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
+        <h1 className="text-3xl font-bold mb-6 ">User Services</h1>
 
         {/* Tabs for Services */}
         <Tabs defaultValue="services-avail">
-          <TabsList>
+          <TabsList >
             <TabsTrigger value="services-avail">Services Available</TabsTrigger>
             <TabsTrigger value="services-apply">Apply Services</TabsTrigger>
           </TabsList>
 
           {/* Available Services List */}
           <TabsContent value="services-avail">
+            
             <ul className="space-y-4">
               {services.map((service, index) => (
                 <li key={index} className="flex justify-between items-center bg-white p-4 shadow rounded-lg">
