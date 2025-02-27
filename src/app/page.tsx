@@ -2,6 +2,7 @@
 import './globals.css';
 import Navbar from "@/components/Navbar";
 import Link from 'next/link';
+import Location from '@/components/Location';
 
 export default function Home() {
   return (

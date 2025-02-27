@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Location from './Location';
 
 function Navbar() {
   return (
@@ -22,6 +23,7 @@ function Navbar() {
         <Link href="/Admin">
           <p className="hover:text-gray-200 transition">Admin</p>
         </Link> */}
+        <Location/>
       </div>
     </div>
   );
