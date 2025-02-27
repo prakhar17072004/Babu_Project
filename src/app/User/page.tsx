@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { toast } from "react-hot-toast";
 
 
 
@@ -19,7 +20,17 @@ const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({ username: "", mobile: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+  
+    // Limit mobile number to 10 characters
+    if (name === "mobile" && value.length > 10) return;
+  
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    
+  };
+  //reset the form//
+  const resetForm = () => {
+    setFormData({ username: "", mobile: "" }); // Reset form fields
   };
 
   const handleSubmit = () => {
@@ -30,8 +41,13 @@ const [open, setOpen] = useState(false);
 
     console.log("Form Data:", formData);
     toast.success("Form submitted successfully!"); // Show success message
+    resetForm();
     setOpen(false); // Close modal after submit
-    setFormData({ username: "", mobile: "" }); // Reset form fields
+    
+  };
+  const handleCancel = () => {
+    resetForm(); // Reset form fields
+    setOpen(false); // Close modal
   };
   return (
     <div>
@@ -94,12 +110,12 @@ const [open, setOpen] = useState(false);
 
             <div>
               <Label htmlFor="mobile">Mobile No.</Label>
-              <Input id="mobile" name="mobile" type='number' value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" />
+              <Input id="mobile" name="mobile" type='number'  maxLength={10} value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" />
             </div>
           </div>
 
           <DialogFooter>
-            <Button variant="outline" onClick={() => setOpen(false)}>
+            <Button variant="outline" onClick={handleCancel}>
               Cancel
             </Button>
             <Button onClick={handleSubmit}>Submit</Button>
