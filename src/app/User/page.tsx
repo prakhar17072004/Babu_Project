@@ -23,8 +23,15 @@ const [open, setOpen] = useState(false);
   };
 
   const handleSubmit = () => {
+    if (!formData.username || !formData.mobile) {
+      toast.error("Please fill the details"); // Show an error notification
+      return;
+    }
+
     console.log("Form Data:", formData);
+    toast.success("Form submitted successfully!"); // Show success message
     setOpen(false); // Close modal after submit
+    setFormData({ username: "", mobile: "" }); // Reset form fields
   };
   return (
     <div>
