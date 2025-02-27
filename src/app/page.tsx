@@ -10,7 +10,7 @@ export default function Home() {
     
     <Navbar/>
       <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 text-gray-800 p-6">
-        <h1 className="text-4xl font-bold mb-4">Babu Admin Dashboard</h1>
+        <h1 className="text-4xl font-bold mb-4">Dashboard</h1>
         <p className="text-lg mb-8">
           Manage records for Users,Babus and Admin.
         </p>
