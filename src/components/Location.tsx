@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import locations from "../Data/Location.json"
 
 function Location() {
-  const [location, setLocation] = useState("Delhi"); // Default location
+  const [location, setLocation] = useState(locations[0].name); // Default location
 
-  const locations = ["Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai"];
+  
 
   return (
     <nav className="  p-4 flex justify-between items-center">
