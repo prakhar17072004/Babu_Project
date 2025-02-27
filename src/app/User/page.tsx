@@ -7,6 +7,7 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
+import Form from "@/components/ui/form"
 
 
 
@@ -44,6 +45,7 @@ function User() {
       <li >Rent Agreement
         <span className='ml-8'>
               <Button variant="outline">Apply</Button>
+                <Form/>
         </span>
 
       </li>
