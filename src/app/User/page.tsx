@@ -7,11 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "react-hot-toast";
 
 function User() {
   const [open, setOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [documentType, setDocumentType] = useState<string | null>(null);
   const [formData, setFormData] = useState({ username: "", mobile: "" });
   const [appliedServices, setAppliedServices] = useState<string[]>([]);
 
@@ -29,29 +31,26 @@ function User() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    // Limit mobile number to 10 characters
-    if (name === "mobile" && value.length > 10) return;
-
+    if (name === "mobile" && value.length > 10) return; // Limit mobile number to 10 digits
     setFormData({ ...formData, [name]: value });
   };
 
   // Reset the form
   const resetForm = () => {
     setFormData({ username: "", mobile: "" });
+    setDocumentType(null);
   };
 
   const handleSubmit = () => {
-    if (!formData.username || !formData.mobile) {
-      toast.error("Please fill the details");
+    if (!formData.username || !formData.mobile || !documentType) {
+      toast.error("Please fill all the details");
       return;
     }
 
-    toast.success(`${selectedService} Form submitted successfully!`);
+    toast.success(`${selectedService} (${documentType}) Form submitted successfully!`);
     
-    // Store the submitted service
     if (selectedService) {
-      setAppliedServices((prev) => [...prev, selectedService]);
+      setAppliedServices((prev) => [...prev, `${selectedService} - ${documentType}`]);
     }
 
     resetForm();
@@ -78,41 +77,37 @@ function User() {
 
           {/* Available Services List */}
           <TabsContent value="services-avail">
-            
-              <ul className="space-y-4">
-                {services.map((service, index) => (
-                  <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
-                    <span className="font-semibold">{service}</span>
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setSelectedService(service);
-                        setOpen(true);
-                      }}
-                    >
-                      Apply
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            
+            <ul className="space-y-4">
+              {services.map((service, index) => (
+                <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+                  <span className="font-semibold">{service}</span>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setSelectedService(service);
+                      setOpen(true);
+                    }}
+                  >
+                    Apply
+                  </Button>
+                </li>
+              ))}
+            </ul>
           </TabsContent>
 
           {/* Applied Services List */}
           <TabsContent value="services-apply">
-            
-              {appliedServices.length > 0 ? (
-                <ul className="space-y-4">
-                  {appliedServices.map((service, index) => (
-                    <li key={index} className=" flex justify-between items-center bg-green-100 p-4 rounded-lg shadow text-center font-semibold">
-                      {service} - Applied
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-gray-500 text-center">No services applied yet.</p>
-              )}
-            
+            {appliedServices.length > 0 ? (
+              <ul className="space-y-4">
+                {appliedServices.map((service, index) => (
+                  <li key={index} className="flex justify-between items-center bg-green-100 p-4 rounded-lg shadow text-center font-semibold">
+                    {service} - Applied
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-500 text-center">No services applied yet.</p>
+            )}
           </TabsContent>
         </Tabs>
       </div>
@@ -133,6 +128,21 @@ function User() {
             <div>
               <Label htmlFor="mobile">Mobile No.</Label>
               <Input id="mobile" name="mobile" type="number" value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" />
+            </div>
+
+            {/* Document Type Dropdown */}
+            <div>
+              <Label>Document Type</Label>
+              <Select onValueChange={(value) => setDocumentType(value)} defaultValue={documentType ?? undefined}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select Document Type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {services.map((service, index) => (
+                    <SelectItem key={index} value={service}>{service}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
