@@ -3,10 +3,14 @@ import React from 'react'
 
 function Admin() {
   return (
-    <div>
-        <Navbar/>
-        <h1>Admin</h1>
-    </div>
+    <>
+         <Navbar/>
+        <div className="bg-white shadow-md rounded-lg p-6 mx-auto mt-[5%]">
+        
+        <h2 className="ext-3xl font-bold mb-6 text-center">Admin Dashboard</h2>
+         </div>
+    </>
+    
   )
 }
 
