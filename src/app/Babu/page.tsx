@@ -5,21 +5,22 @@ import Navbar from "@/components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
+import jobs from "../../Data/services.json"
 
 function Babu() {
   const [acceptedJobs, setAcceptedJobs] = useState<string[]>([]);
 
-  // List of available jobs
-  const jobs = [
-    "Rent Agreement",
-    "Allowance Agreement",
-    "House Agreement",
-    "Challan Agreement",
-    "Property Agreement",
-    "Vehicle Lease",
-    "Employment Contract",
-    "Business Agreement",
-  ];
+  // // List of available jobs
+  // const jobs = [
+  //   "Rent Agreement",
+  //   "Allowance Agreement",
+  //   "House Agreement",
+  //   "Challan Agreement",
+  //   "Property Agreement",
+  //   "Vehicle Lease",
+  //   "Employment Contract",
+  //   "Business Agreement",
+  // ];
 
   // Function to accept a job
   const handleAcceptJob = (job: string) => {
