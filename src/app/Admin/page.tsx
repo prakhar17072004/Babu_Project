@@ -1,5 +1,6 @@
 import Navbar from '@/components/Navbar'
 import React from 'react'
+import Doc from "../../Data/services.json"
 
 function Admin() {
   return (
@@ -19,40 +20,9 @@ function Admin() {
               <th className="border border-gray-300 p-2">Status</th>
             </tr>
           </thead>
-          {/* <tbody>
-            {allImages.map((item) => (
-              <tr key={item.id} className="text-center">
-                <td className="border border-gray-300 p-2">{item.name}</td>
-                <td className="border border-gray-300 p-2">{item.symbol}</td>
-                <td className="border border-gray-300 p-2">
-                  {item.category || "N/A"}
-                </td>
-                <td className="border border-gray-300 p-2">
-                  {item.tournament || "N/A"}
-                </td>
-                <td className="border border-gray-300 p-2 flex justify-center space-x-2">
-                  <button
-                    onClick={() => setPreviewModal(item)}
-                    className="bg-blue-600 text-white py-1 px-3 rounded-lg hover:bg-blue-500"
-                  >
-                    Preview
-                  </button>
-                  <button
-                    onClick={() => setEditModal(item)}
-                    className="bg-yellow-500 text-white py-1 px-3 rounded-lg hover:bg-yellow-400"
-                  >
-                    Update
-                  </button>
-                  <button
-                    onClick={() => copyToClipboard(item.url)}
-                    className="bg-green-600 text-white py-1 px-3 rounded-lg hover:bg-green-500"
-                  >
-                    Copy URL
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody> */}
+             {Doc.map((doc)=>(
+              <tr
+             ))}
         </table>
       </div>
 
