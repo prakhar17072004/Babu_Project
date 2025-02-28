@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
-import services from "../../Data/services.json";
+import servicesData from "../../Data/services.json";
 function User() {
   const [open, setOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -16,16 +16,16 @@ function User() {
   const [appliedServices, setAppliedServices] = useState<string[]>([]);
 
   // List of services
-  const services = [
-    "Rent Agreement",
-    "Allowance Agreement",
-    "House Agreement",
-    "Challan Agreement",
-    "Property Agreement",
-    "Vehicle Lease",
-    "Employment Contract",
-    "Business Agreement",
-  ];
+  // const services = [
+  //   "Rent Agreement",
+  //   "Allowance Agreement",
+  //   "House Agreement",
+  //   "Challan Agreement",
+  //   "Property Agreement",
+  //   "Vehicle Lease",
+  //   "Employment Contract",
+  //   "Business Agreement",
+  // ];
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -80,7 +80,7 @@ function User() {
           <TabsContent value="services-avail">
             
               <ul className="space-y-4">
-                {services.map((service, index) => (
+                {servicesData.map((service, index) => (
                   <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
                     <span className="font-semibold">{service}</span>
                     <Button
