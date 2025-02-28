@@ -12,14 +12,14 @@ function Admin() {
         <table className="table-auto w-full border-collapse border border-gray-300">
           <thead>
             <tr>
-              <th className="border border-gray-300 p-2">Name</th>
-              <th className="border border-gray-300 p-2">Symbol</th>
-              <th className="border border-gray-300 p-2">Category</th>
-              <th className="border border-gray-300 p-2">Tournament</th>
-              <th className="border border-gray-300 p-2">Actions</th>
+              <th className="border border-gray-300 p-2">Client Name</th>
+              <th className="border border-gray-300 p-2">Babu Name</th>
+              <th className="border border-gray-300 p-2">Document Type</th>
+              <th className="border border-gray-300 p-2">Client MobileNo.</th>
+              <th className="border border-gray-300 p-2">Status</th>
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
             {allImages.map((item) => (
               <tr key={item.id} className="text-center">
                 <td className="border border-gray-300 p-2">{item.name}</td>
@@ -52,7 +52,7 @@ function Admin() {
                 </td>
               </tr>
             ))}
-          </tbody>
+          </tbody> */}
         </table>
       </div>
 
