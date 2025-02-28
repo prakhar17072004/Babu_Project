@@ -20,13 +20,13 @@ function Admin() {
               <th className="border border-gray-300 p-2">Status</th>
             </tr>
           </thead>
-          <tbody>
+          {/* <tbody>
              {document.map((doc,id)=>(
               <tr key={id}>
                 <td>{doc}</td>
               </tr>
              ))}
-          </tbody>
+          </tbody> */}
             
         </table>
       </div>
