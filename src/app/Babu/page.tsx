@@ -1,13 +1,86 @@
-import Navbar from '@/components/Navbar'
-import React from 'react'
+"use client";
+
+import { useState } from "react";
+import Navbar from "@/components/Navbar";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import { toast } from "react-hot-toast";
 
 function Babu() {
+  const [acceptedJobs, setAcceptedJobs] = useState<string[]>([]);
+
+  // List of available jobs
+  const jobs = [
+    "Rent Agreement",
+    "Allowance Agreement",
+    "House Agreement",
+    "Challan Agreement",
+    "Property Agreement",
+    "Vehicle Lease",
+    "Employment Contract",
+    "Business Agreement",
+  ];
+
+  // Function to accept a job
+  const handleAcceptJob = (job: string) => {
+    if (!acceptedJobs.includes(job)) {
+      setAcceptedJobs((prev) => [...prev, job]);
+      toast.success(`${job} accepted successfully!`);
+    }
+  };
+
   return (
     <div>
-        <Navbar/>
-        <h1>Babu</h1>
+      <Navbar />
+      <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
+        <h1 className="text-3xl font-bold mb-6 text-center">Babu Dashboard</h1>
+
+        {/* Tabs for Jobs */}
+        <Tabs defaultValue="jobs-avail">
+          <TabsList className="bg-white p-2 rounded-lg shadow-md">
+            <TabsTrigger value="jobs-avail">Jobs Available</TabsTrigger>
+            <TabsTrigger value="jobs-accepted">Jobs Accepted</TabsTrigger>
+          </TabsList>
+
+          {/* Available Jobs List */}
+          <TabsContent value="jobs-avail">
+            <ul className="space-y-4">
+              {jobs.map((job, index) => (
+                <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+                  <span className="font-semibold">{job}</span>
+                  <div className="space-x-2">
+                    <Button
+                      variant="outline"
+                      onClick={() => handleAcceptJob(job)}
+                      disabled={acceptedJobs.includes(job)}
+                    >
+                      {acceptedJobs.includes(job) ? "Accepted" : "Accept"}
+                    </Button>
+                    <Button variant="outline">Ignore</Button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </TabsContent>
+
+          {/* Accepted Jobs List */}
+          <TabsContent value="jobs-accepted">
+            {acceptedJobs.length > 0 ? (
+              <ul className="space-y-4">
+                {acceptedJobs.map((job, index) => (
+                  <li key={index} className="bg-green-100 p-4 rounded-lg shadow text-center font-semibold">
+                    {job} - Accepted ✅
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-500 text-center">No jobs accepted yet.</p>
+            )}
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
-  )
+  );
 }
 
-export default Babu
+export default Babu;
