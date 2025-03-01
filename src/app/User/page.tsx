@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
-import servicesData from "../../Data/services.json";
+import servicesData from "../../Data/data.json";
 function User() {
   const [open, setOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -82,11 +82,11 @@ function User() {
               <ul className="space-y-4">
                 {servicesData.map((service, index) => (
                   <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
-                    <span className="font-semibold">{service}</span>
+                    <span className="font-semibold">{service.services}</span>
                     <Button
                       variant="outline"
                       onClick={() => {
-                        setSelectedService(service);
+                        setSelectedService(service.services);
                         setOpen(true);
                       }}
                     >

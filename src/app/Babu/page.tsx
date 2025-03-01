@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
-import jobs from "../../Data/services.json"
+import jobs from "../../Data/data.json"
 
 function Babu() {
   const [acceptedJobs, setAcceptedJobs] = useState<string[]>([]);
@@ -48,14 +48,14 @@ function Babu() {
             <ul className="space-y-4">
               {jobs.map((job, index) => (
                 <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
-                  <span className="font-semibold">{job}</span>
+                  <span className="font-semibold">{job.services}</span>
                   <div className="space-x-2">
                     <Button
                       variant="outline"
-                      onClick={() => handleAcceptJob(job)}
-                      disabled={acceptedJobs.includes(job)}
+                      onClick={() => handleAcceptJob(job.services)}
+                      disabled={acceptedJobs.includes(job.services)}
                     >
-                      {acceptedJobs.includes(job) ? "Accepted" : "Accept"}
+                      {acceptedJobs.includes(job.services) ? "Accepted" : "Accept"}
                     </Button>
                     <Button variant="outline">Ignore</Button>
                   </div>

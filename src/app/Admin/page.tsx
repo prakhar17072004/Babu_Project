@@ -1,6 +1,7 @@
 import Navbar from '@/components/Navbar'
 import React from 'react'
 import document from "../../Data/data.json"
+import { Button } from '@/components/ui/button'
 
 function Admin() {
   return (
@@ -25,6 +26,11 @@ function Admin() {
               <tr key={index} className="text-center">
                  <td className="border border-gray-300 p-2">{doc.name}</td>
                  <td className="border border-gray-300 p-2">{doc.babu_name}</td>
+                 <td className="border border-gray-300 p-2">{doc.services}</td>
+                 <td className="border border-gray-300 p-2">{doc.mobile_no}</td>
+                 <td className="border border-gray-300 p-2">
+                  <Button className='bg-green-500'>{doc.status}</Button>
+                 </td>
               </tr>
              ))}
           </tbody>
