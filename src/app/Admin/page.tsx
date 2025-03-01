@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar'
 import React from 'react'
-import document from "../../Data/services.json"
+import document from "../../Data/data.json"
 
 function Admin() {
   return (
@@ -20,13 +20,14 @@ function Admin() {
               <th className="border border-gray-300 p-2">Status</th>
             </tr>
           </thead>
-          {/* <tbody>
-             {document.map((doc,id)=>(
-              <tr key={id}>
-                <td>{doc}</td>
+          <tbody>
+             {document.map((doc,index)=>(
+              <tr key={index} className="text-center">
+                 <td className="border border-gray-300 p-2">{doc.name}</td>
+                 <td className="border border-gray-300 p-2">{doc.babu_name}</td>
               </tr>
              ))}
-          </tbody> */}
+          </tbody>
             
         </table>
       </div>

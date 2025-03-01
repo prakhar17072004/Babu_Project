@@ -1,0 +1,17 @@
+[
+    {
+      "name": "John Doe",
+      "babu_name": "Mr. Smith",
+      "services": ["Plumbing", "Electrical"],
+      "mobile_no": "1234567890",
+      "status": "Active"
+    },
+    {
+      "name": "Jane Doe",
+      "babu_name": "Mr. Johnson",
+      "services": ["Cleaning", "Carpentry"],
+      "mobile_no": "9876543210",
+      "status": "Pending"
+    }
+  ]
+  
