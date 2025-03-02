@@ -124,7 +124,7 @@ function User() {
                 type="text"
                 value={formData.username}
                 
-                className="bg-gray-200 cursor-not-allowed"
+                className="bg-gray-200 "
               />
             </div>
 
@@ -137,7 +137,7 @@ function User() {
                 type="number"
                 value={formData.mobile}
                 
-                className="bg-gray-200 cursor-not-allowed"
+                className="bg-gray-200 "
               />
             </div>
 
@@ -150,7 +150,7 @@ function User() {
                 type="text"
                 value={ ""}
                 
-                className="bg-gray-200 cursor-not-allowed"
+                className="bg-gray-200 "
               />
             </div>
           </div>
