@@ -142,7 +142,7 @@ function User() {
             {/* Document Type Field - Non-editable */}
             <div>
               <Label htmlFor="documentType">Details</Label>
-              <Input id="documentType" name="documentType" type="text"   className="bg-gray-200" />
+              <Input id="documentType" name="documentType" type="text" placeholder="Enter the details.."  className="bg-gray-200" />
             </div>
           </div>
 
