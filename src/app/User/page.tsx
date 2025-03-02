@@ -117,13 +117,13 @@ function User() {
           <div className="space-y-4">
             {/* Username Field - Pre-filled and Disabled */}
             <div>
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username">Name</Label>
               <Input
                 id="username"
                 name="username"
                 type="text"
                 value={formData.username}
-                disabled
+                
                 className="bg-gray-200 cursor-not-allowed"
               />
             </div>
@@ -136,20 +136,20 @@ function User() {
                 name="mobile"
                 type="number"
                 value={formData.mobile}
-                disabled
+                
                 className="bg-gray-200 cursor-not-allowed"
               />
             </div>
 
             {/* Document Type Field - Non-editable */}
             <div>
-              <Label htmlFor="documentType">Document Type</Label>
+              <Label htmlFor="documentType">Details</Label>
               <Input
                 id="documentType"
                 name="documentType"
                 type="text"
-                value={selectedService || ""}
-                disabled
+                value={ ""}
+                
                 className="bg-gray-200 cursor-not-allowed"
               />
             </div>
