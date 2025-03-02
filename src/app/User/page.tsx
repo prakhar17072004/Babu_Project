@@ -124,19 +124,49 @@ function User() {
           <DialogHeader>
             <DialogTitle>Apply for {selectedService}</DialogTitle>
           </DialogHeader>
-          {user.map((data,index)=>(
-            <div className="space-y-4">
-            <div key={index}>
-              <Label htmlFor="username">{data.name}</Label>
-              <Input id="username" name="username" type="text" value={formData.username} onChange={handleChange} placeholder="Enter your name" />
-            </div>
+          {user.map((data, index) => (
+  <div className="space-y-4" key={index}>
+    {/* Username Field - Pre-filled and Disabled */}
+    <div>
+      <Label htmlFor="username">Username</Label>
+      <Input 
+        id="username" 
+        name="username" 
+        type="text" 
+        value={formData.username} 
+        disabled 
+        className="bg-gray-200 cursor-not-allowed"
+      />
+    </div>
 
-            <div>
-              <Label htmlFor="mobile">Mobile No.</Label>
-              <Input id="mobile" name="mobile" type="number" value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" />
-            </div>
-          </div>
-          ))}
+    {/* Mobile Number Field - Pre-filled and Disabled */}
+    <div>
+      <Label htmlFor="mobile">Mobile No.</Label>
+      <Input 
+        id="mobile" 
+        name="mobile" 
+        type="number" 
+        value={formData.mobile} 
+        disabled 
+        className="bg-gray-200 cursor-not-allowed"
+      />
+    </div>
+
+    {/* Document Type Field - Non-editable */}
+    <div>
+      <Label htmlFor="documentType">Document Type</Label>
+      <Input 
+        id="documentType" 
+        name="documentType" 
+        type="text" 
+        value={selectedService} 
+        disabled 
+        className="bg-gray-200 cursor-not-allowed"
+      />
+    </div>
+  </div>
+))}
+
           
 
           <DialogFooter>
