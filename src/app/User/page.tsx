@@ -113,47 +113,47 @@ function User() {
           <DialogHeader>
             <DialogTitle>Apply for {selectedService}</DialogTitle>
           </DialogHeader>
-
           <div className="space-y-4">
-            {/* Username Field - Pre-filled and Disabled */}
-            <div>
-              <Label htmlFor="username">Name</Label>
-              <Input
-                id="username"
-                name="username"
-                type="text"
-                value={formData.username}
-                
-                className="bg-gray-200 "
-              />
-            </div>
+  {/* Username Field - Pre-filled and Editable */}
+  <div>
+    <Label htmlFor="username">Name</Label>
+    <Input
+      id="username"
+      name="username"
+      type="text"
+      value={formData.username}
+      onChange={(e) => setFormData({ ...formData, username: e.target.value })}
+      className="bg-gray-200"
+    />
+  </div>
 
-            {/* Mobile Number Field - Pre-filled and Disabled */}
-            <div>
-              <Label htmlFor="mobile">Mobile No.</Label>
-              <Input
-                id="mobile"
-                name="mobile"
-                type="number"
-                value={formData.mobile}
-                
-                className="bg-gray-200 "
-              />
-            </div>
+  {/* Mobile Number Field - Pre-filled and Editable */}
+  <div>
+    <Label htmlFor="mobile">Mobile No.</Label>
+    <Input
+      id="mobile"
+      name="mobile"
+      type="number"
+      value={formData.mobile}
+      onChange={(e) => setFormData({ ...formData, mobile: e.target.value })}
+      className="bg-gray-200"
+    />
+  </div>
 
-            {/* Document Type Field - Non-editable */}
-            <div>
-              <Label htmlFor="documentType">Details</Label>
-              <Input
-                id="documentType"
-                name="documentType"
-                type="text"
-                value={ ""}
-                
-                className="bg-gray-200 "
-              />
-            </div>
-          </div>
+  {/* Document Type Field - Non-editable */}
+  <div>
+    <Label htmlFor="documentType">Details</Label>
+    <Input
+      id="documentType"
+      name="documentType"
+      type="text"
+      value={""}
+      readOnly
+      className="bg-gray-200"
+    />
+  </div>
+</div>
+
 
           <DialogFooter>
             <Button variant="outline" onClick={handleCancel}>
