@@ -123,10 +123,10 @@ function User() {
           <DialogHeader>
             <DialogTitle>Apply for {selectedService}</DialogTitle>
           </DialogHeader>
-
-          <div className="space-y-4">
+          {servicesData.map((data,index)=>(
+            <div className="space-y-4">
             <div>
-              <Label htmlFor="username">Username</Label>
+              <Label htmlFor="username">{data.name}</Label>
               <Input id="username" name="username" type="text" value={formData.username} onChange={handleChange} placeholder="Enter your name" />
             </div>
 
@@ -135,6 +135,8 @@ function User() {
               <Input id="mobile" name="mobile" type="number" value={formData.mobile} onChange={handleChange} placeholder="Enter your mobile number" />
             </div>
           </div>
+          ))}
+          
 
           <DialogFooter>
             <Button variant="outline" onClick={handleCancel}>Cancel</Button>
