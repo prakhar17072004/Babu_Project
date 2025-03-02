@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
 import servicesData from "../../Data/data.json";
+import user from "../../Data/user.json";
 function User() {
   const [open, setOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
@@ -123,9 +124,9 @@ function User() {
           <DialogHeader>
             <DialogTitle>Apply for {selectedService}</DialogTitle>
           </DialogHeader>
-          {servicesData.map((data,index)=>(
+          {user.map((data,index)=>(
             <div className="space-y-4">
-            <div>
+            <div key={index}>
               <Label htmlFor="username">{data.name}</Label>
               <Input id="username" name="username" type="text" value={formData.username} onChange={handleChange} placeholder="Enter your name" />
             </div>
