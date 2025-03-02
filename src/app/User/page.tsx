@@ -9,38 +9,27 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
 import servicesData from "../../Data/data.json";
+
 function User() {
   const [open, setOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [formData, setFormData] = useState({ username: "", mobile: "" });
   const [appliedServices, setAppliedServices] = useState<string[]>([]);
+  const [availableServices, setAvailableServices] = useState<string[]>(servicesData.map(service => service.services));
 
-  // List of services
-  // const services = [
-  //   "Rent Agreement",
-  //   "Allowance Agreement",
-  //   "House Agreement",
-  //   "Challan Agreement",
-  //   "Property Agreement",
-  //   "Vehicle Lease",
-  //   "Employment Contract",
-  //   "Business Agreement",
-  // ];
-
+  // Handle form input change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
-    // Limit mobile number to 10 characters
     if (name === "mobile" && value.length > 10) return;
-
     setFormData({ ...formData, [name]: value });
   };
 
-  // Reset the form
+  // Reset form fields
   const resetForm = () => {
     setFormData({ username: "", mobile: "" });
   };
 
+  // Submit service application
   const handleSubmit = () => {
     if (!formData.username || !formData.mobile) {
       toast.error("Please fill the details");
@@ -49,15 +38,22 @@ function User() {
 
     toast.success(`${selectedService} Form submitted successfully!`);
     
-    // Store the submitted service
     if (selectedService) {
+      // Add service to Applied Services
       setAppliedServices((prev) => [...prev, selectedService]);
+
+      // Remove from Available Services
+      setAvailableServices((prev) => prev.filter(service => service !== selectedService));
+
+      // Store in local storage (to sync with Babu component)
+      localStorage.setItem("appliedServices", JSON.stringify([...appliedServices, selectedService]));
     }
 
     resetForm();
     setOpen(false);
   };
 
+  // Cancel application
   const handleCancel = () => {
     resetForm();
     setOpen(false);
@@ -78,41 +74,37 @@ function User() {
 
           {/* Available Services List */}
           <TabsContent value="services-avail">
-            
-              <ul className="space-y-4">
-                {servicesData.map((service, index) => (
-                  <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
-                    <span className="font-semibold">{service.services}</span>
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        setSelectedService(service.services);
-                        setOpen(true);
-                      }}
-                    >
-                      Apply
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            
+            <ul className="space-y-4">
+              {availableServices.map((service, index) => (
+                <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+                  <span className="font-semibold">{service}</span>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      setSelectedService(service);
+                      setOpen(true);
+                    }}
+                  >
+                    Apply
+                  </Button>
+                </li>
+              ))}
+            </ul>
           </TabsContent>
 
           {/* Applied Services List */}
           <TabsContent value="services-apply">
-            
-              {appliedServices.length > 0 ? (
-                <ul className="space-y-4">
-                  {appliedServices.map((service, index) => (
-                    <li key={index} className=" flex justify-between items-center bg-green-100 p-4 rounded-lg shadow text-center font-semibold">
-                      {service} - Applied
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="text-gray-500 text-center">No services applied yet.</p>
-              )}
-            
+            {appliedServices.length > 0 ? (
+              <ul className="space-y-4">
+                {appliedServices.map((service, index) => (
+                  <li key={index} className="flex justify-between items-center bg-green-100 p-4 rounded-lg shadow text-center font-semibold">
+                    {service} - Applied
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-500 text-center">No services applied yet.</p>
+            )}
           </TabsContent>
         </Tabs>
       </div>
