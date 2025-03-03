@@ -16,28 +16,28 @@
     {
         "name": "John Doe",
         "babu_name": "Mr. Smith",
-        "services": "Rent Agreement",
+        "services": "Allowance Agreement",
         "mobile_no": "1234567890",
         "status": "Processing"
       },
       {
         "name": "Jane Doe",
         "babu_name": "Mr. Johnson",
-        "services": "House Agreement",
+        "services": "Property Agreement",
         "mobile_no": "9876543210",
         "status": "Processing"
       },
       {
         "name": "John Doe",
         "babu_name": "Mr. Smith",
-        "services": "Rent Agreement",
+        "services": "Vehicle Lease",
         "mobile_no": "1234567890",
         "status": "Processing"
       },
       {
         "name": "Jane Doe",
         "babu_name": "Mr. Johnson",
-        "services": "House Agreement",
+        "services": "Business",
         "mobile_no": "9876543210",
         "status": "Processing"
       }
