@@ -37,8 +37,15 @@ function Babu() {
               )}
             </TabsTrigger>
 
-            {/* Jobs Accepted Tab */}
-            <TabsTrigger value="jobs-accepted">Jobs Accepted</TabsTrigger>
+            {/* Jobs Accepted Tab with Count Badge */}
+            <TabsTrigger value="jobs-accepted" className="relative">
+              Jobs Accepted
+              {acceptedJobs.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  {acceptedJobs.length}
+                </span>
+              )}
+            </TabsTrigger>
           </TabsList>
 
           {/* Available Jobs List */}
