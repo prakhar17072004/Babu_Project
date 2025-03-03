@@ -9,6 +9,7 @@ import jobs from "../../Data/data.json";
 
 function Babu() {
   const [acceptedJobs, setAcceptedJobs] = useState<string[]>([]);
+  const [expandedJob, setExpandedJob] = useState<string | null>(null); // Track which job details are shown
 
   // Function to accept a job
   const handleAcceptJob = (job: string) => {
@@ -52,18 +53,39 @@ function Babu() {
           <TabsContent value="jobs-avail">
             <ul className="space-y-4">
               {jobs.map((job, index) => (
-                <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
-                  <span className="font-semibold">{job.services}</span>
-                  <div className="space-x-2">
+                <li key={index} className="bg-gray-100 p-4 rounded-lg shadow">
+                  <div className="flex justify-between items-center">
+                    <span className="font-semibold">{job.services}</span>
                     <Button
                       variant="outline"
-                      onClick={() => handleAcceptJob(job.services)}
-                      disabled={acceptedJobs.includes(job.services)}
+                      onClick={() => setExpandedJob(expandedJob === job.services ? null : job.services)}
                     >
-                      {acceptedJobs.includes(job.services) ? "Accepted" : "Accept"}
+                      {expandedJob === job.services ? "Hide" : "More"}
                     </Button>
-                    <Button variant="outline">Ignore</Button>
                   </div>
+
+                  {/* Show applicant details when expanded */}
+                  {expandedJob === job.services && (
+                    <div className="mt-4 bg-white p-4 rounded-lg shadow">
+                      {/* <p><strong>Name:</strong> Prakhar</p>
+                      <p><strong>Mobile:</strong> 1234567890</p>
+                      <p><strong>Email:</strong> {job.applicant.email}</p>
+                      <p><strong>Experience:</strong>2 years years</p> */}
+
+                      <div className="mt-4 flex gap-2">
+                        <Button
+                          variant="outline"
+                          onClick={() => handleAcceptJob(job.services)}
+                          disabled={acceptedJobs.includes(job.services)}
+                        >
+                          {acceptedJobs.includes(job.services) ? "Accepted" : "Accept"}
+                        </Button>
+                        <Button variant="outline" onClick={() => setExpandedJob(null)}>
+                          Ignore
+                        </Button>
+                      </div>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>
