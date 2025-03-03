@@ -5,22 +5,10 @@ import Navbar from "@/components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
-import jobs from "../../Data/data.json"
+import jobs from "../../Data/data.json";
 
 function Babu() {
   const [acceptedJobs, setAcceptedJobs] = useState<string[]>([]);
-
-  // // List of available jobs
-  // const jobs = [
-  //   "Rent Agreement",
-  //   "Allowance Agreement",
-  //   "House Agreement",
-  //   "Challan Agreement",
-  //   "Property Agreement",
-  //   "Vehicle Lease",
-  //   "Employment Contract",
-  //   "Business Agreement",
-  // ];
 
   // Function to accept a job
   const handleAcceptJob = (job: string) => {
@@ -38,8 +26,18 @@ function Babu() {
 
         {/* Tabs for Jobs */}
         <Tabs defaultValue="jobs-avail">
-          <TabsList className="bg-white p-2 rounded-lg shadow-md">
-            <TabsTrigger value="jobs-avail">Jobs Available</TabsTrigger>
+          <TabsList className="bg-white p-2 rounded-lg shadow-md flex gap-4">
+            {/* Jobs Available Tab with Count Badge */}
+            <TabsTrigger value="jobs-avail" className="relative">
+              Jobs Available
+              {jobs.length > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                  {jobs.length}
+                </span>
+              )}
+            </TabsTrigger>
+
+            {/* Jobs Accepted Tab */}
             <TabsTrigger value="jobs-accepted">Jobs Accepted</TabsTrigger>
           </TabsList>
 
