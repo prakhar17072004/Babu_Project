@@ -67,10 +67,10 @@ function Babu() {
                   {/* Show applicant details when expanded */}
                   {expandedJob === job.services && (
                     <div className="mt-4 bg-white p-4 rounded-lg shadow">
-                      {/* <p><strong>Name:</strong> Prakhar</p>
+                      <p><strong>Name:</strong> Prakhar</p>
                       <p><strong>Mobile:</strong> 1234567890</p>
-                      <p><strong>Email:</strong> {job.applicant.email}</p>
-                      <p><strong>Experience:</strong>2 years years</p> */}
+                      <p><strong>Email:</strong> @hjjhkskgljki</p>
+                      <p><strong>Experience:</strong>2 years years</p>
 
                       <div className="mt-4 flex gap-2">
                         <Button
