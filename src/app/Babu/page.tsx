@@ -70,7 +70,7 @@ function Babu() {
                       <p><strong>Name:</strong> Prakhar</p>
                       <p><strong>Mobile:</strong> 1234567890</p>
                       <p><strong>Email:</strong> @hjjhkskgljki</p>
-                      <p><strong>Experience:</strong>2 years years</p>
+                      
 
                       <div className="mt-4 flex gap-2">
                         <Button
