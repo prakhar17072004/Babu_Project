@@ -8,15 +8,35 @@ import { toast } from "react-hot-toast";
 import jobs from "../../Data/data.json";
 import clientData from "../../Data/babu.json";
 
+interface Job {
+  services: string;
+  clientId: number;
+}
+
+interface Client {
+  id: number;
+  name: string;
+  mobile_no: string;
+  Email: string;
+  details: string;
+}
+
+interface AcceptedJob {
+  service: string;
+  client: Client;
+}
+
 function Babu() {
-  const [acceptedJobs, setAcceptedJobs] = useState<string[]>([]);
+  const [acceptedJobs, setAcceptedJobs] = useState<AcceptedJob[]>([]);
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
 
   // Function to accept a job
-  const handleAcceptJob = (job: string) => {
-    if (!acceptedJobs.includes(job)) {
-      setAcceptedJobs((prev) => [...prev, job]);
-      toast.success(`${job} accepted successfully!`);
+  const handleAcceptJob = (job: Job) => {
+    const client = clientData.find((c) => c.id === job.clientId);
+
+    if (client && !acceptedJobs.some((j) => j.service === job.services)) {
+      setAcceptedJobs((prev) => [...prev, { service: job.services, client }]);
+      toast.success(`${job.services} accepted successfully!`);
     }
   };
 
@@ -76,10 +96,10 @@ function Babu() {
                         <div className="mt-4 flex gap-2">
                           <Button
                             variant="outline"
-                            onClick={() => handleAcceptJob(job.services)}
-                            disabled={acceptedJobs.includes(job.services)}
+                            onClick={() => handleAcceptJob(job)}
+                            disabled={acceptedJobs.some((j) => j.service === job.services)}
                           >
-                            {acceptedJobs.includes(job.services) ? "Accepted" : "Accept"}
+                            {acceptedJobs.some((j) => j.service === job.services) ? "Accepted" : "Accept"}
                           </Button>
                           <Button variant="outline" onClick={() => setExpandedJob(null)}>
                             Ignore
@@ -98,8 +118,14 @@ function Babu() {
             {acceptedJobs.length > 0 ? (
               <ul className="space-y-4">
                 {acceptedJobs.map((job, index) => (
-                  <li key={index} className="bg-green-100 p-4 rounded-lg shadow text-center font-semibold">
-                    {job} - Accepted ✅
+                  <li key={index} className="bg-green-100 p-4 rounded-lg shadow">
+                    <p className="text-lg font-semibold">{job.service} - Accepted ✅</p>
+                    <div className="mt-2 text-gray-700">
+                      <p><strong>Name:</strong> {job.client.name}</p>
+                      <p><strong>Mobile:</strong> {job.client.mobile_no}</p>
+                      <p><strong>Email:</strong> {job.client.Email}</p>
+                      <p><strong>Details:</strong> {job.client.details}</p>
+                    </div>
                   </li>
                 ))}
               </ul>
