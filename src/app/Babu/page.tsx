@@ -32,13 +32,17 @@ function Babu() {
 
   // Function to accept a job
   const handleAcceptJob = (job: Job) => {
-    const client = clientData.find((c) => c.id === job.clientId);
-
+    const client = clientData.find((c) => Number(c.id) === job.clientId); // Ensure type consistency
+  
     if (client && !acceptedJobs.some((j) => j.service === job.services)) {
-      setAcceptedJobs((prev) => [...prev, { service: job.services, client }]);
+      setAcceptedJobs((prev) => [
+        ...prev,
+        { service: job.services, client: { ...client, id: Number(client.id) } }, // Convert id to number
+      ]);
       toast.success(`${job.services} accepted successfully!`);
     }
   };
+  
 
   return (
     <div>
