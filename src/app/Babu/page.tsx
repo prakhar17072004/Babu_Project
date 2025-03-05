@@ -6,10 +6,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
 import jobs from "../../Data/data.json";
+import clientData from "../../Data/babu.json";
 
 function Babu() {
   const [acceptedJobs, setAcceptedJobs] = useState<string[]>([]);
-  const [expandedJob, setExpandedJob] = useState<string | null>(null); // Track which job details are shown
+  const [expandedJob, setExpandedJob] = useState<string | null>(null);
 
   // Function to accept a job
   const handleAcceptJob = (job: string) => {
@@ -25,10 +26,8 @@ function Babu() {
       <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
         <h1 className="text-3xl font-bold mb-6 text-center">Babu Dashboard</h1>
 
-        {/* Tabs for Jobs */}
         <Tabs defaultValue="jobs-avail">
           <TabsList className="bg-white p-2 rounded-lg shadow-md flex gap-4">
-            {/* Jobs Available Tab with Count Badge */}
             <TabsTrigger value="jobs-avail" className="relative">
               Jobs Available
               {jobs.length > 0 && (
@@ -38,7 +37,6 @@ function Babu() {
               )}
             </TabsTrigger>
 
-            {/* Jobs Accepted Tab with Count Badge */}
             <TabsTrigger value="jobs-accepted" className="relative">
               Jobs Accepted
               {acceptedJobs.length > 0 && (
@@ -52,42 +50,45 @@ function Babu() {
           {/* Available Jobs List */}
           <TabsContent value="jobs-avail">
             <ul className="space-y-4">
-              {jobs.map((job, index) => (
-                <li key={index} className="bg-gray-100 p-4 rounded-lg shadow">
-                  <div className="flex justify-between items-center">
-                    <span className="font-semibold">{job.services}</span>
-                    <Button
-                      variant="outline"
-                      onClick={() => setExpandedJob(expandedJob === job.services ? null : job.services)}
-                    >
-                      {expandedJob === job.services ? "Hide" : "More"}
-                    </Button>
-                  </div>
+              {jobs.map((job, index) => {
+                const client = clientData.find((c) => c.id === job.clientId); // Fetch client details
 
-                  {/* Show applicant details when expanded */}
-                  {expandedJob === job.services && (
-                    <div className="mt-4 bg-white p-4 rounded-lg shadow">
-                      <p><strong>Name:</strong> Prakhar</p>
-                      <p><strong>Mobile:</strong> 1234567890</p>
-                      <p><strong>Email:</strong> @hjjhkskgljki</p>
-                      
-
-                      <div className="mt-4 flex gap-2">
-                        <Button
-                          variant="outline"
-                          onClick={() => handleAcceptJob(job.services)}
-                          disabled={acceptedJobs.includes(job.services)}
-                        >
-                          {acceptedJobs.includes(job.services) ? "Accepted" : "Accept"}
-                        </Button>
-                        <Button variant="outline" onClick={() => setExpandedJob(null)}>
-                          Ignore
-                        </Button>
-                      </div>
+                return (
+                  <li key={index} className="bg-gray-100 p-4 rounded-lg shadow">
+                    <div className="flex justify-between items-center">
+                      <span className="font-semibold">{job.services}</span>
+                      <Button
+                        variant="outline"
+                        onClick={() => setExpandedJob(expandedJob === job.services ? null : job.services)}
+                      >
+                        {expandedJob === job.services ? "Hide" : "More"}
+                      </Button>
                     </div>
-                  )}
-                </li>
-              ))}
+
+                    {/* Show client details when expanded */}
+                    {expandedJob === job.services && client && (
+                      <div className="mt-4 bg-white p-4 rounded-lg shadow">
+                        <p><strong>Name:</strong> {client.name}</p>
+                        <p><strong>Mobile:</strong> {client.mobile_no}</p>
+                        <p><strong>Email:</strong> {client.Email}</p>
+
+                        <div className="mt-4 flex gap-2">
+                          <Button
+                            variant="outline"
+                            onClick={() => handleAcceptJob(job.services)}
+                            disabled={acceptedJobs.includes(job.services)}
+                          >
+                            {acceptedJobs.includes(job.services) ? "Accepted" : "Accept"}
+                          </Button>
+                          <Button variant="outline" onClick={() => setExpandedJob(null)}>
+                            Ignore
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </TabsContent>
 
