@@ -80,12 +80,13 @@ function Babu() {
                 return (
                   <li key={index} className="bg-gray-100 p-4 rounded-lg shadow">
                     <div className="flex justify-between items-center">
-                      <span className="font-semibold">{job.services}</span>
+                      <span className="font-semibold ">{job.services}</span>
                       <Button
+                      
                         variant="outline"
                         onClick={() => setExpandedJob(expandedJob === job.services ? null : job.services)}
                       >
-                        {expandedJob === job.services ? "Hide" : "More"}
+                        {expandedJob === job.services ? "Hide" : "ore"}
                       </Button>
                     </div>
 
