@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Prakhar Mishra",
+    "mobile_no": "1234567890",
+    "Email":"@123gmail.com",
+    "details": "agreeement papers"
+  },
+  {
+    "name": "Vipin Pandey",
+    "mobile_no": "1234567890",
+    "Email":"@123gmail.com",
+    "details": "agreeement papers"
+  },
+  {
+    "name": "Birjesh mishra",
+    "mobile_no": "1234567890",
+    "Email":"@123gmail.com",
+    "details": "agreeement papers"
+  },
+  {
+    "name":"Alok singh",
+    "mobile_no":"1234567890",
+    "Email":"@123gmail.com",
+    "details":"agreeement papers"
+   },
+   {
+    "name":"Arvind Arora",
+    "mobile_no":"1234567890",
+    "Email":"@123gmail.com",
+    "details":"agreeement papers"
+   }
+]
