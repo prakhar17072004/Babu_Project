@@ -71,6 +71,7 @@ function Babu() {
                         <p><strong>Name:</strong> {client.name}</p>
                         <p><strong>Mobile:</strong> {client.mobile_no}</p>
                         <p><strong>Email:</strong> {client.Email}</p>
+                        <p><strong>Details:</strong> {client.details}</p>
 
                         <div className="mt-4 flex gap-2">
                           <Button
