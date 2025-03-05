@@ -9,9 +9,9 @@ function Admin() {
          <Navbar/>
         <div className="bg-white shadow-md rounded-lg p-6 mx-auto mt-[5%]">
         
-        <h2 className="ext-3xl font-bold mb-6 text-center">Admin Dashboard</h2>
-        <div className="overflow-x-auto">
-        <table className="table-auto w-full border-collapse border border-gray-300">
+        <h2 className="text-3xl font-bold mb-6 text-center">Admin Dashboard</h2>
+        <div className="overflow-x-auto ">
+        <table className="table-auto w-full border-collapse border border-gray-300 ">
           <thead>
             <tr>
               <th className="border border-gray-300 p-2">Client Name</th>
