@@ -86,7 +86,7 @@ function Babu() {
                         variant="outline"
                         onClick={() => setExpandedJob(expandedJob === job.services ? null : job.services)}
                       >
-                        {expandedJob === job.services ? "Hide" : "ore"}
+                        {expandedJob === job.services ? "Hide" : "More"}
                       </Button>
                     </div>
 
