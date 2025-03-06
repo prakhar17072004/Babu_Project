@@ -78,7 +78,7 @@ function Babu() {
                 const client = clientData.find((c) => c.id === job.clientId); // Fetch client details
 
                 return (
-                  <li key={index} className="bg-gray-100 p-4 rounded-lg shadow">
+                  <li key={index} className="bg-gray-300 p-4 rounded-lg shadow">
                     <div className="flex justify-between items-center">
                       <span className="font-semibold ">{job.services}</span>
                       <Button
