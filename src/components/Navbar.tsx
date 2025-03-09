@@ -14,7 +14,7 @@ function Navbar() {
 
       {/* Navigation Links */}
       <div className="flex space-x-16">
-        {/* <Link href="/User">
+        <Link href="/User">
           <p className="hover:text-gray-200 transition">User</p>
         </Link>
         <Link href="/Babu">
@@ -22,7 +22,7 @@ function Navbar() {
         </Link>
         <Link href="/Admin">
           <p className="hover:text-gray-200 transition">Admin</p>
-        </Link> */}
+        </Link>
         <Location/>
       </div>
     </div>
