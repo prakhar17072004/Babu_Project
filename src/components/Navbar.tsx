@@ -15,7 +15,7 @@ function Navbar() {
       <div className="flex items-center space-x-2">
         <Location />
         <div className="flex space-x-4">
-          <Button className="bg-green-500 text-white transition-colors duration-500 hover:bg-green-600">
+          <Button className="bg-green-500 text-white transition-all duration-500 transform hover:bg-green-600 hover:scale-110">
             Log In
           </Button>
           <Button className="bg-blue-500 text-white transition-all duration-500 transform hover:bg-blue-600 hover:scale-110">
