@@ -14,7 +14,7 @@ function Navbar() {
       </div>
 
       {/* Navigation Links */}
-      <div className="flex space-x-16">
+      <div className="flex-1 flex justify-center">
         {/* <Link href="/User">
           <p className="hover:text-gray-200 transition">User</p>
         </Link>
@@ -25,13 +25,13 @@ function Navbar() {
           <p className="hover:text-gray-200 transition">Admin</p>
         </Link> */}
         <Location/>
-        <Button className='bg-green-500'>Log In</Button>
-        <Button>Get started</Button>
+         {/* Buttons (Right) */}
+      <div className="flex space-x-4">
+        <Button className="bg-green-500 text-white">Log In</Button>
+        <Button className="bg-blue-500 text-white">Get Started</Button>
       </div>
-      <div className=''>
-          
-        
-        </div>
+      </div>
+      
     </div>
   );
 }
