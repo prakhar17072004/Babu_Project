@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Location from './Location';
+import { Button } from './ui/button';
 
 function Navbar() {
   return (
@@ -24,7 +25,13 @@ function Navbar() {
           <p className="hover:text-gray-200 transition">Admin</p>
         </Link> */}
         <Location/>
+        
       </div>
+      <div className='top-20'>
+          
+        <Button className='bg-green-500'>Log In</Button>
+        <Button>Get started</Button>
+        </div>
     </div>
   );
 }
