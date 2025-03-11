@@ -1,9 +1,9 @@
 import { useState } from "react";
-import SignupForm from "../components/forms/SignupForm";
-import LoginForm from "../components/forms/LoginForm";
+import SignupForm from "../../components/forms/signupform";
+import LoginForm from "../../components/forms/loginform";
 
 export default function GetStarted() {
-  const [activeForm, setActiveForm] = useState(null);
+  const [activeForm, setActiveForm] = useState<"signup" | "login" | null>(null);
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
