@@ -17,9 +17,9 @@ export default function SignupForm({ onBack }:SignupFormProps) {
             placeholder="Password"
             className="w-full p-3 border rounded mb-4"
           />
-          <div className="w-full h-12 bg-gray-200 flex items-center justify-center mb-4">
+          {/* <div className="w-full h-12 bg-gray-200 flex items-center justify-center mb-4">
             CAPTCHA
-          </div>
+          </div> */}
           <button className="w-full bg-blue-500 text-white p-3 rounded-lg">Signup</button>
         </form>
         <button className="mt-4 text-blue-500" onClick={onBack}>
