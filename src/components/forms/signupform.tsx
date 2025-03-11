@@ -42,34 +42,57 @@ export default function SignupForm({ onBack }: SignupFormProps) {
             <h3 className="text-lg font-semibold mb-4">
               Signup as {role.charAt(0).toUpperCase() + role.slice(1)}
             </h3>
-            <form>
-              <label>Username</label>
-              <input
-                type="text"
-                placeholder="Email or Phone No"
-                className="w-full p-3 border rounded mb-4"
-              />
-              <label className="left-0">Passward</label>
-              <input
-                type="password"
-                placeholder="Password"
-                className="w-full p-3 border rounded mb-4"
-              />
-              {/* Add extra fields based on role if needed */}
+            <form className="text-left">
+              <div className="mb-4">
+                <label className="block font-semibold">Username</label>
+                <input
+                  type="text"
+                  placeholder="Enter your username"
+                  className="w-full p-3 border rounded"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block font-semibold">Email or Phone No</label>
+                <input
+                  type="text"
+                  placeholder="Enter email or phone number"
+                  className="w-full p-3 border rounded"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block font-semibold">Password</label>
+                <input
+                  type="password"
+                  placeholder="Enter your password"
+                  className="w-full p-3 border rounded"
+                />
+              </div>
+
+              {/* Extra fields based on role */}
               {role === "babu" && (
-                <input
-                  type="text"
-                  placeholder="Babu ID"
-                  className="w-full p-3 border rounded mb-4"
-                />
+                <div className="mb-4">
+                  <label className="block font-semibold">Babu ID</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Babu ID"
+                    className="w-full p-3 border rounded"
+                  />
+                </div>
               )}
+
               {role === "admin" && (
-                <input
-                  type="text"
-                  placeholder="Admin Code"
-                  className="w-full p-3 border rounded mb-4"
-                />
+                <div className="mb-4">
+                  <label className="block font-semibold">Admin Code</label>
+                  <input
+                    type="text"
+                    placeholder="Enter Admin Code"
+                    className="w-full p-3 border rounded"
+                  />
+                </div>
               )}
+
               <button className="w-full bg-blue-500 text-white p-3 rounded-lg">
                 Signup
               </button>
@@ -81,7 +104,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
         )}
 
         <button className="mt-4 text-gray-500" onClick={onBack}>
-             Back to Get Started
+          Back to Get Started
         </button>
       </div>
     </div>
