@@ -43,11 +43,13 @@ export default function SignupForm({ onBack }: SignupFormProps) {
               Signup as {role.charAt(0).toUpperCase() + role.slice(1)}
             </h3>
             <form>
+              <label>Username</label>
               <input
                 type="text"
                 placeholder="Email or Phone No"
                 className="w-full p-3 border rounded mb-4"
               />
+              <label className="left-0">Passward</label>
               <input
                 type="password"
                 placeholder="Password"
