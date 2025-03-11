@@ -18,9 +18,11 @@ function Location() {
 
   useEffect(() => {
     if (inputRef.current) {
-      (inputRef.current as HTMLInputElement).focus(); // Type assertion
+        setTimeout(() => {
+            (inputRef.current as HTMLInputElement).focus();
+        }, 20); // Add a small delay
     }
-  }, [searchTerm]);
+}, [searchTerm]);
 
   return (
     <nav className="p-4 flex justify-between items-center">
