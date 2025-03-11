@@ -50,7 +50,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter your first name"
+                  placeholder=" First name"
                   className="w-full p-3 border rounded"
                   required
                 />
@@ -62,7 +62,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter your last name"
+                  placeholder=" Last name"
                   className="w-full p-3 border rounded"
                   required
                 />
