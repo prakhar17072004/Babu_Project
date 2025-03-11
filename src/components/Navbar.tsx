@@ -18,7 +18,7 @@ function Navbar() {
           <Button className="bg-green-500 text-white transition-all duration-500 transform hover:bg-green-600 hover:scale-110">
             Log In
           </Button>
-          <Link href="../app/GetStart/page.tsx">
+          <Link href="/GetStart">
           <Button className="bg-blue-500 text-white transition-all duration-500 transform hover:bg-blue-600 hover:scale-110">
             Get Started
           </Button>
