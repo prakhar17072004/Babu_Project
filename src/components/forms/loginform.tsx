@@ -6,7 +6,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
-        <h2 className="text-2xl font-bold mb-6">Login</h2>
+        <h2 className="text-2xl font-bold mb-6">Log in to your account</h2>
         <form>
           <input type="text" placeholder="Email or Phone No" className="w-full p-3 border rounded mb-4" />
           <input type="password" placeholder="Password" className="w-full p-3 border rounded mb-4" />
