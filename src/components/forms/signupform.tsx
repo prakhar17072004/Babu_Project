@@ -44,51 +44,78 @@ export default function SignupForm({ onBack }: SignupFormProps) {
             </h3>
             <form className="text-left">
               <div className="mb-4">
-                <label className="block font-semibold">Username</label>
+                <label className="block font-semibold">
+                  First Name <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
-                  placeholder="Enter your username"
+                  placeholder="Enter your first name"
                   className="w-full p-3 border rounded"
+                  required
                 />
               </div>
 
               <div className="mb-4">
-                <label className="block font-semibold">Email or Phone No</label>
+                <label className="block font-semibold">
+                  Last Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  placeholder="Enter your last name"
+                  className="w-full p-3 border rounded"
+                  required
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block font-semibold">
+                  Email or Phone No <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="text"
                   placeholder="Enter email or phone number"
                   className="w-full p-3 border rounded"
+                  required
                 />
               </div>
 
               <div className="mb-4">
-                <label className="block font-semibold">Password</label>
+                <label className="block font-semibold">
+                  Password <span className="text-red-500">*</span>
+                </label>
                 <input
                   type="password"
                   placeholder="Enter your password"
                   className="w-full p-3 border rounded"
+                  required
                 />
               </div>
 
               {/* Extra fields based on role */}
               {role === "babu" && (
                 <div className="mb-4">
-                  <label className="block font-semibold">Babu ID</label>
+                  <label className="block font-semibold">
+                    Babu ID <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     placeholder="Enter Babu ID"
                     className="w-full p-3 border rounded"
+                    required
                   />
                 </div>
               )}
 
               {role === "admin" && (
                 <div className="mb-4">
-                  <label className="block font-semibold">Admin Code</label>
+                  <label className="block font-semibold">
+                    Admin Code <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     placeholder="Enter Admin Code"
                     className="w-full p-3 border rounded"
+                    required
                   />
                 </div>
               )}
