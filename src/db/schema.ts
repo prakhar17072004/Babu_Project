@@ -21,6 +21,7 @@ export const babus = pgTable("babus", {
 // Admins Table (Specific details for Admin role)
 export const admins = pgTable("admins", {
   id: serial("id").primaryKey(),
-  user_name: varchar("user_name", { length: 50 }).notNull(),
+  first_name: varchar("first_name", { length: 25 }).notNull(),
+  last_name: varchar("last_name", { length: 25 }).notNull(),
   admin_code: varchar("admin_code", { length: 20 }).notNull(), // Unique Admin Code
 });
