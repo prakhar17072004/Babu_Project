@@ -10,7 +10,6 @@ import locations from "../Data/Location.json";
 function Location() {
   const [location, setLocation] = useState(locations[0]); // Default location
   const [searchTerm, setSearchTerm] = useState(""); // State for search input
-  const [isSearchActive, setIsSearchActive] = useState(false); // Track search input focus
 
   // Filter locations based on search term
   const filteredLocations = locations.filter((loc) =>
@@ -32,9 +31,6 @@ function Location() {
               type="text"
               placeholder="Search city..."
               value={searchTerm}
-              readOnly={!isSearchActive} // Allow typing only when clicked
-              onFocus={() => setIsSearchActive(true)} // Activate input on focus
-              onBlur={() => setIsSearchActive(false)} // Deactivate on blur
               onChange={(e) => setSearchTerm(e.target.value)}
               className="border rounded-lg px-3 py-2 w-full text-black placeholder-gray-500 focus:outline-none"
             />
