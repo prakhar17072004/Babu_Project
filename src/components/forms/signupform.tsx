@@ -86,11 +86,13 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   Password <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="password"
-                  placeholder="Enter your password"
-                  className="w-full p-3 border rounded"
-                  required
-                />
+  type="password"
+  placeholder="Enter your password"
+  className="w-full p-3 border rounded"
+  required
+  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+  title="Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character (@, $, !, %, *, ?, &)."
+/>
               </div>
 
               {/* Extra fields based on role */}
