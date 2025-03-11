@@ -43,6 +43,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
               Signup as {role.charAt(0).toUpperCase() + role.slice(1)}
             </h3>
             <form className="text-left">
+              <div className="flex gap-2">
               <div className="mb-4">
                 <label className="block font-semibold">
                   First Name <span className="text-red-500">*</span>
@@ -65,6 +66,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   className="w-full p-3 border rounded"
                   required
                 />
+              </div>
               </div>
 
               <div className="mb-4">
