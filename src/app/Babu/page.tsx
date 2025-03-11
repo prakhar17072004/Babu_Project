@@ -48,7 +48,7 @@ function Babu() {
     <div>
       <Navbar />
       <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
-        <h1 className="text-3xl font-bold mb-6 text-center">Babu Dashboard</h1>
+        {/* <h1 className="text-3xl font-bold mb-6 text-center">Babu Dashboard</h1> */}
 
         <Tabs defaultValue="jobs-avail">
           <TabsList className="bg-white p-2 rounded-lg shadow-md flex gap-4">

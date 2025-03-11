@@ -59,7 +59,7 @@ function User() {
     <div>
       <Navbar />
       <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
-        <h1 className="text-3xl font-bold mb-6 text-center">User Dashboard</h1>
+        {/* <h1 className="text-3xl font-bold mb-6 text-center">User Dashboard</h1> */}
 
         {/* Tabs for Services */}
         <Tabs defaultValue="services-avail">
