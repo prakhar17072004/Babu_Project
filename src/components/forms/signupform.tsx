@@ -44,29 +44,29 @@ export default function SignupForm({ onBack }: SignupFormProps) {
             </h3>
             <form className="text-left">
               <div className="flex gap-2">
-              <div className="mb-4">
-                <label className="block font-semibold">
-                  First Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder=" First name"
-                  className="w-full p-3 border rounded"
-                  required
-                />
-              </div>
+                <div className="mb-4">
+                  <label className="block font-semibold">
+                    First Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder=" First name"
+                    className="w-full p-3 border rounded"
+                    required
+                  />
+                </div>
 
-              <div className="mb-4">
-                <label className="block font-semibold">
-                  Last Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder=" Last name"
-                  className="w-full p-3 border rounded"
-                  required
-                />
-              </div>
+                <div className="mb-4">
+                  <label className="block font-semibold">
+                    Last Name <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder=" Last name"
+                    className="w-full p-3 border rounded"
+                    required
+                  />
+                </div>
               </div>
 
               <div className="mb-4">
@@ -74,10 +74,12 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   Email or Phone No <span className="text-red-500">*</span>
                 </label>
                 <input
-                  type="text"
-                  placeholder="Enter email or phone number"
+                  type="email"
+                  placeholder="Enter your email"
                   className="w-full p-3 border rounded"
                   required
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  title="Enter a valid email address (e.g., example@domain.com)."
                 />
               </div>
 
@@ -86,13 +88,13 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   Password <span className="text-red-500">*</span>
                 </label>
                 <input
-  type="password"
-  placeholder="Enter your password"
-  className="w-full p-3 border rounded"
-  required
-  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
-  title="Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character (@, $, !, %, *, ?, &)."
-/>
+                  type="password"
+                  placeholder="Enter your password"
+                  className="w-full p-3 border rounded"
+                  required
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                  title="Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character (@, $, !, %, *, ?, &)."
+                />
               </div>
 
               {/* Extra fields based on role */}
