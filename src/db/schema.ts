@@ -27,6 +27,7 @@ export const admins = pgTable("admins", {
   id: serial("id").primaryKey(),
   first_name: varchar("first_name", { length: 25 }).notNull(),
   last_name: varchar("last_name", { length: 25 }).notNull(),
+  email: varchar("email", { length: 20 }).notNull().unique(),
   mobile_number: varchar("mobile_number", { length: 10 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
   admin_code: varchar("admin_code", { length: 20 }).notNull(), // Unique Admin Code
