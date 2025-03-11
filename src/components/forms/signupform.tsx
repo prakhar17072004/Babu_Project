@@ -1,7 +1,7 @@
 interface SignupFormProps {
   onBack: () => void; // Explicitly defining onBack as a function that returns void
 }
-export default function SignupForm({ onBack }) {
+export default function SignupForm({ onBack }:SignupFormProps) {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
