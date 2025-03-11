@@ -10,7 +10,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="bg-white p-6 rounded-lg shadow-lg w-96 text-center">
-        <h2 className="text-2xl font-bold mb-6">Signup</h2>
+        {/* <h2 className="text-2xl font-bold mb-6">Signup</h2> */}
 
         {/* Role Selection */}
         {!role ? (
