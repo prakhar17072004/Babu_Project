@@ -20,7 +20,7 @@ function Navbar() {
             Log In
           </Button>
           </Link>
-          <Link href="/GetStart">
+          <Link href="/Getstart">
           <Button className="bg-blue-500 text-white transition-all duration-500 transform hover:bg-blue-600 hover:scale-110">
             Get Started
           </Button>
