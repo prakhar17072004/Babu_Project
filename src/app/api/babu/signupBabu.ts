@@ -5,14 +5,15 @@ import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
   try {
-    const { firstName, lastName, email, password, babuId } = await req.json();
+    const { first_name, last_name, email, mobile_number, password, babuId } = await req.json();
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
     await db.insert(babus).values({
-      firstName,
-      lastName,
+      first_name,
+      last_name,
       email,
+      mobile_number,
       password: hashedPassword,
       role: "babu",
       babuId,

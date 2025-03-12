@@ -19,6 +19,7 @@ export const babus = pgTable("babus", {
   email: varchar("email", { length: 20 }).notNull().unique(),
   mobile_number: varchar("mobile_number", { length: 10 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
+  role: varchar("role", { length: 10 }).notNull(), // Can be "user", "babu", or "admin"
   babu_id: varchar("babu_id", { length: 20 }).notNull().unique(), // Unique Babu Identifier
 });
 
@@ -30,5 +31,6 @@ export const admins = pgTable("admins", {
   email: varchar("email", { length: 20 }).notNull().unique(),
   mobile_number: varchar("mobile_number", { length: 10 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
+  role: varchar("role", { length: 10 }).notNull(), // Can be "user", "babu", or "admin"
   admin_code: varchar("admin_code", { length: 20 }).notNull(), // Unique Admin Code
 });
