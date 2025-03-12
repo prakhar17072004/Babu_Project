@@ -6,11 +6,9 @@ dotenv.config();
 
 export default defineConfig({
   dialect: "postgresql",
-  driver: "pglite",
   schema: "./src/db/schema.ts",
   out: "./src/db/migrations",
-
   dbCredentials: {
-    url: process.env.DATABASE_URL ||"postgresql://neondb_owner:npg_7Diomb8NeIKZ@ep-still-bird-a84atqt7-pooler.eastus2.azure.neon.tech/neondb?sslmode=require"
+    url: process.env.DATABASE_URL as string, // Ensure it's a string
   },
 });
