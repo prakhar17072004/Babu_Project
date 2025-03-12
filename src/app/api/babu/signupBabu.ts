@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/drizzle";
-import { users } from "@/lib/schema";
+import { db } from "@/db/index";
+import { babus} from "@/db/schema";
 import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await db.insert(users).values({
+    await db.insert(babus).values({
       firstName,
       lastName,
       email,
