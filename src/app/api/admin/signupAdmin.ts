@@ -1,21 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/drizzle";
-import { users } from "@/lib/schema";
+import { db } from "@/db/index";
+import { admins } from "@/db/schema";
 import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
   try {
-    const { firstName, lastName, email, password, adminCode } = await req.json();
+    const { first_name, last_name, email,mobile_number, password, role, admin_code } = await req.json();
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await db.insert(users).values({
-      firstName,
-      lastName,
+    await db.insert(admins).values({
+      first_name,
+      last_name,
       email,
+      mobile_number,
       password: hashedPassword,
-      role: "admin",
-      adminCode,
+      role,
+      admin_code,
     });
 
     return NextResponse.json({ message: "Admin registered successfully" }, { status: 201 });
