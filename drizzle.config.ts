@@ -11,6 +11,6 @@ export default defineConfig({
   out: "./src/db/migrations",
 
   dbCredentials: {
-    url: process.env.DATABASE_URL ||"postgresql://neondb_owner:npg_qRF6eWijcsy2@ep-late-firefly-a80nlv3q-pooler.eastus2.azure.neon.tech/neondb?sslmode=require" as string, // Ensure it's a string
+    url: process.env.DATABASE_URL ||"postgresql://neondb_owner:npg_7Diomb8NeIKZ@ep-still-bird-a84atqt7-pooler.eastus2.azure.neon.tech/neondb?sslmode=require"
   },
 });
