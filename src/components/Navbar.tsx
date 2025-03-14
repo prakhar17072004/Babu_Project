@@ -16,7 +16,7 @@ function Navbar() {
         <Location />
         <div className="flex space-x-4">
           <Link href="/loginform">
-          <Button className="bg-green-600 text-white transition-all duration-500 transform hover:bg-green-600 hover:scale-110">
+          <Button className="bg-green-500 text-white transition-all duration-500 transform hover:bg-green-600 hover:scale-110">
             Log In
           </Button>
           </Link>
