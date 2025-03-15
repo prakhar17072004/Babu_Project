@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/db/index";
-import { users } from "@/db/schema";
+import { db } from "@/app/db/index";
+import { users } from "@/app/db/schema";
 import bcrypt from "bcrypt";
 
 export async function POST(req: NextRequest) {
