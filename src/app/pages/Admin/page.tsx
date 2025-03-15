@@ -1,6 +1,6 @@
 import Navbar from '@/components/Navbar'
 import React from 'react'
-import document from "../../Data/data.json"
+import document from "../../../Data/data.json"
 import { Button } from '@/components/ui/button'
 
 function Admin() {
