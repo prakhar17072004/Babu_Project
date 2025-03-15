@@ -1,12 +1,15 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/drizzle";
-import { users } from "@/lib/schema";
+import { db } from "@/app/db/index";
+import { admins } from "@/app/db/schema";
+import { eq } from "drizzle-orm"; // Import eq for filtering
 
 export async function GET() {
   try {
-    const allAdmins = await db.select().from(users).where(users.role.equals("admin"));
-    return NextResponse.json(allAdmins, { status: 200 });
+    // Fetch users where role is "user"
+    const userList = await db.select().from(admins).where(eq(admins.role, "admin"));
+
+    return NextResponse.json({ users: userList }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: "Failed to fetch admin users" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to fetch users" }, { status: 500 });
   }
 }
