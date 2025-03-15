@@ -5,8 +5,8 @@ import Navbar from "@/components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { toast } from "react-hot-toast";
-import jobs from "../../../Data/data.json";
-import clientData from "../../../Data/babu.json";
+import jobs from "../../Data/data.json";
+import clientData from "../../Data/babu.json";
 
 interface Job {
   services: string;

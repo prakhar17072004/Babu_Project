@@ -8,8 +8,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
-import servicesData from "../../../Data/data.json";
-import userData from "../../../Data/user.json";
+import servicesData from "../../Data/data.json";
+import userData from "../../Data/user.json";
 
 function User() {
   const [open, setOpen] = useState(false);
