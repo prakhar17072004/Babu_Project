@@ -84,40 +84,23 @@ function User() {
 
           {/* Chat Input */}
           <div className="flex gap-2 p-4 border-t">
-          <Input
-  id="message"
-  placeholder="Type a message..."
-  className="flex-1"
-  onKeyDown={(e) => {
-    if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
-      const userMessage = { sender: "user", text: e.currentTarget.value };
-      
-      setAppliedServices((prev) =>
-        prev.map((service) =>
-          service.serviceName === selectedChat
-            ? { ...service, messages: [...service.messages, userMessage] }
-            : service
-        )
-      );
-
-      const input = e.currentTarget;
-      input.value = "";
-
-      // Simulate "babu" response after a delay
-      setTimeout(() => {
-        const babuMessage = { sender: "babu", text: "Okay, noted!" };
-        setAppliedServices((prev) =>
-          prev.map((service) =>
-            service.serviceName === selectedChat
-              ? { ...service, messages: [...service.messages, babuMessage] }
-              : service
-          )
-        );
-      }, 1000); // Delay for 1 second
-    }
-  }}
-/>
-
+            <Input
+              id="message"
+              placeholder="Type a message..."
+              className="flex-1"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
+                  setAppliedServices((prev) =>
+                    prev.map((service) =>
+                      service.serviceName === selectedChat
+                        ? { ...service, messages: [...service.messages, { sender: "user", text: e.currentTarget.value }] }
+                        : service
+                    )
+                  );
+                  e.currentTarget.value = "";
+                }
+              }}
+            />
             <Button
               onClick={() => {
                 setAppliedServices((prev) =>
