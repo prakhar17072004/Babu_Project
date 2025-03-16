@@ -146,7 +146,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
             </form>
             <p className="mt-4 text-gray-700">
   Already have an account?{" "}
-  <Link href="/loginform" className="text-blue-500 hover:underline">
+  <Link href="" className="text-blue-500 hover:underline">
     Log in
   </Link>
 </p>
