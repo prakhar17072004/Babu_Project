@@ -1,4 +1,5 @@
 import { useState } from "react";
+import  Link  from "next/link";
 
 interface SignupFormProps {
   onBack: () => void;
@@ -144,11 +145,11 @@ export default function SignupForm({ onBack }: SignupFormProps) {
               </button>
             </form>
             <p className="mt-4 text-gray-700">
-              Already have an account?{" "}
-              <a href="/loginform" className="text-blue-500 hover:underline">
-                Log in
-              </a>
-            </p>
+  Already have an account?{" "}
+  <Link href="/loginform" className="text-blue-500 hover:underline">
+    Log in
+  </Link>
+</p>
             <button className="mt-4 text-blue-500" onClick={() => setRole("")}>
               Back to Role Selection
             </button>
