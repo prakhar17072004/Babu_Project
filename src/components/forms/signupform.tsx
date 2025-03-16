@@ -96,6 +96,19 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   title="Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character (@, $, !, %, *, ?, &)."
                 />
               </div>
+              <div className="mb-4">
+                <label className="block font-semibold">
+                  Confirm Password <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="password"
+                  placeholder="Enter your password"
+                  className="w-full p-3 border rounded"
+                  required
+                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                  title="Password must be at least 8 characters long, contain at least one lowercase letter, one uppercase letter, one number, and one special character (@, $, !, %, *, ?, &)."
+                />
+              </div>
 
               {/* Extra fields based on role */}
               {role === "babu" && (
@@ -130,6 +143,12 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                 Signup
               </button>
             </form>
+            <p className="mt-4 text-gray-700">
+              Already have an account?{" "}
+              <a href="/loginform" className="text-blue-500 hover:underline">
+                Log in
+              </a>
+            </p>
             <button className="mt-4 text-blue-500" onClick={() => setRole("")}>
               Back to Role Selection
             </button>
