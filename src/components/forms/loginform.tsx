@@ -1,4 +1,5 @@
 import { X } from "lucide-react"; // Import close icon
+import { Button } from "../ui/button";
 
 interface LoginFormProps {
   onBack: () => void; // Function to handle closing
@@ -17,7 +18,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
         <form>
           <input type="text" placeholder="Email or Phone No" className="w-full p-3 border rounded mb-4" />
           <input type="password" placeholder="Password" className="w-full p-3 border rounded mb-4" />
-          <button className="w-full bg-green-500 text-white p-3 rounded-lg cursor-pointer">Login</button>
+          <Button className="w-full bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 cursor-pointer">Log In</Button>
         </form>
       </div>
     </div>
