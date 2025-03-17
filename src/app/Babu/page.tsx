@@ -27,11 +27,17 @@ interface AcceptedJob {
   client: Client;
 }
 
+interface Message {
+  sender: "babu" | "user";
+  text: string;
+}
+
 function Babu() {
   const [acceptedJobs, setAcceptedJobs] = useState<AcceptedJob[]>([]);
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
-  const [chatMessages, setChatMessages] = useState<{ [key: string]: { sender: "babu" | "user"; text: string }[] }>({});
+  const [chatMessages, setChatMessages] = useState<{ [key: string]: Message[] }>({});
+  const [messageInput, setMessageInput] = useState("");
 
   // Function to accept a job
   const handleAcceptJob = (job: Job) => {
@@ -43,6 +49,21 @@ function Babu() {
         { service: job.services, client: { ...client, id: Number(client.id) } },
       ]);
       toast.success(`${job.services} accepted successfully!`);
+    }
+  };
+
+  // Function to handle sending messages
+  const handleSendMessage = () => {
+    if (selectedChat && messageInput.trim() !== "") {
+      setChatMessages((prev) => ({
+        ...prev,
+        [selectedChat]: [
+          ...(prev[selectedChat] || []),
+          { sender: "user", text: messageInput },
+          { sender: "babu", text: "Okay, noted!" },
+        ],
+      }));
+      setMessageInput(""); // Clear input field
     }
   };
 
@@ -74,32 +95,15 @@ function Babu() {
               id="message"
               placeholder="Type a message..."
               className="flex-1"
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
-                  const userMessage = e.currentTarget.value.trim();
-                  setChatMessages((prev) => ({
-                    ...prev,
-                    [selectedChat]: [
-                      ...(prev[selectedChat] || []),
-                      { sender: "user", text: userMessage },
-                      { sender: "babu", text: "Okay, noted!" }
-                    ],
-                  }));
-                  e.currentTarget.value = "";
+                if (e.key === "Enter") {
+                  handleSendMessage();
                 }
               }}
             />
-            <Button
-              onClick={() => {
-                setChatMessages((prev) => ({
-                  ...prev,
-                  [selectedChat]: [
-                    ...(prev[selectedChat] || []),
-                    { sender: "babu", text: "Okay, noted!" }
-                  ],
-                }));
-              }}
-            >
+            <Button onClick={handleSendMessage} disabled={!messageInput.trim()}>
               Send
             </Button>
           </div>
