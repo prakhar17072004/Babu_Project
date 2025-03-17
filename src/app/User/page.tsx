@@ -14,6 +14,7 @@ function User() {
   const [open, setOpen] = useState(false);
   const [selectedService, setSelectedService] = useState<string | null>(null);
   const [selectedChat, setSelectedChat] = useState<string | null>(null);
+  const [messageInput, setMessageInput] = useState("");
   const [formData, setFormData] = useState({
     username: "",
     mobile: "",
@@ -61,6 +62,22 @@ function User() {
     setOpen(false);
   };
 
+  const sendMessage = () => {
+    if (!messageInput.trim()) return;
+
+    setAppliedServices((prev) =>
+      prev.map((service) =>
+        service.serviceName === selectedChat
+          ? { 
+              ...service, 
+              messages: [...service.messages, { sender: "user", text: messageInput }, { sender: "babu", text: "Okay, noted!" }]
+            }
+          : service
+      )
+    );
+    setMessageInput(""); // Clear input after sending
+  };
+
   if (selectedChat) {
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
@@ -84,41 +101,15 @@ function User() {
 
           {/* Chat Input */}
           <div className="flex gap-2 p-4 border-t">
-          <Input
-  id="message"
-  placeholder="Type a message..."
-  className="flex-1"
-  onKeyDown={(e) => {
-    if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
-      const userMessage = e.currentTarget.value.trim();
-      setAppliedServices((prev) =>
-        prev.map((service) =>
-          service.serviceName === selectedChat
-            ? { 
-                ...service, 
-                messages: [...service.messages, { sender: "user", text: userMessage }, { sender: "babu", text: "Okay, noted!" }]
-              }
-            : service
-        )
-      );
-      e.currentTarget.value = "";
-    }
-  }}
-/>
-
-            <Button
-              onClick={() => {
-                setAppliedServices((prev) =>
-                  prev.map((service) =>
-                    service.serviceName === selectedChat
-                      ? { ...service, messages: [...service.messages, { sender: "babu", text: "Okay, noted!" }] }
-                      : service
-                  )
-                );
-              }}
-            >
-              Send
-            </Button>
+            <Input
+              id="message"
+              placeholder="Type a message..."
+              className="flex-1"
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+            />
+            <Button onClick={sendMessage}>Send</Button>
           </div>
         </div>
       </div>
