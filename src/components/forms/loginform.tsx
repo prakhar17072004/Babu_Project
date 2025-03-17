@@ -30,7 +30,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
         <p className="mt-4 text-gray-600">
           Don't have an account?{" "}
           <a href="#" className="text-blue-500 hover:underline">
-            Create a new account
+            Sign Up
           </a>
         </p>
       </div>
