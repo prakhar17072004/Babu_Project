@@ -18,10 +18,21 @@ export default function LoginForm({ onBack }: LoginFormProps) {
         <form>
           <input type="text" placeholder="Email or Phone No" className="w-full p-3 border rounded mb-4" />
           <input type="password" placeholder="Password" className="w-full p-3 border rounded mb-4" />
-          <Button className="w-full bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 cursor-pointer">Log In</Button>
-          <div className="bg-slate-300 h-[2px] mt-4"></div>
-          
+          <Button className="w-full bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 cursor-pointer">
+            Log In
+          </Button>
         </form>
+
+        {/* Divider */}
+        <div className="bg-slate-300 h-[2px] mt-4"></div>
+
+        {/* Create Account Link */}
+        <p className="mt-4 text-gray-600">
+          Don't have an account?{" "}
+          <a href="#" className="text-blue-500 hover:underline">
+            Create a new account
+          </a>
+        </p>
       </div>
     </div>
   );
