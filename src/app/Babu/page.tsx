@@ -4,6 +4,7 @@ import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { toast } from "react-hot-toast";
 import jobs from "../../Data/data.json";
 import clientData from "../../Data/babu.json";
@@ -29,27 +30,88 @@ interface AcceptedJob {
 function Babu() {
   const [acceptedJobs, setAcceptedJobs] = useState<AcceptedJob[]>([]);
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
+  const [selectedChat, setSelectedChat] = useState<string | null>(null);
+  const [chatMessages, setChatMessages] = useState<{ [key: string]: { sender: "babu" | "user"; text: string }[] }>({});
 
   // Function to accept a job
   const handleAcceptJob = (job: Job) => {
-    const client = clientData.find((c) => Number(c.id) === job.clientId); // Ensure type consistency
+    const client = clientData.find((c) => Number(c.id) === job.clientId);
   
     if (client && !acceptedJobs.some((j) => j.service === job.services)) {
       setAcceptedJobs((prev) => [
         ...prev,
-        { service: job.services, client: { ...client, id: Number(client.id) } }, // Convert id to number
+        { service: job.services, client: { ...client, id: Number(client.id) } },
       ]);
       toast.success(`${job.services} accepted successfully!`);
     }
   };
-  
+
+  // If a chat is selected, show chat UI
+  if (selectedChat) {
+    return (
+      <div className="min-h-screen flex flex-col bg-gray-50">
+        <Navbar />
+        <div className="p-6 flex flex-col flex-grow">
+          <div className="flex items-center justify-between border-b pb-4">
+            <Button onClick={() => setSelectedChat(null)}>⬅ Back</Button>
+            <h1 className="text-xl font-semibold">Chat for {selectedChat}</h1>
+          </div>
+
+          {/* Chat Messages */}
+          <div className="flex-grow overflow-y-auto p-4 space-y-2">
+            {chatMessages[selectedChat]?.map((msg, index) => (
+              <div key={index} className={`flex ${msg.sender === "babu" ? "justify-start" : "justify-end"}`}>
+                <div className={`p-3 rounded-lg max-w-xs ${msg.sender === "babu" ? "bg-gray-200" : "bg-blue-200"}`}>
+                  {msg.text}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Chat Input */}
+          <div className="flex gap-2 p-4 border-t">
+            <Input
+              id="message"
+              placeholder="Type a message..."
+              className="flex-1"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && e.currentTarget.value.trim() !== "") {
+                  const userMessage = e.currentTarget.value.trim();
+                  setChatMessages((prev) => ({
+                    ...prev,
+                    [selectedChat]: [
+                      ...(prev[selectedChat] || []),
+                      { sender: "user", text: userMessage },
+                      { sender: "babu", text: "Okay, noted!" }
+                    ],
+                  }));
+                  e.currentTarget.value = "";
+                }
+              }}
+            />
+            <Button
+              onClick={() => {
+                setChatMessages((prev) => ({
+                  ...prev,
+                  [selectedChat]: [
+                    ...(prev[selectedChat] || []),
+                    { sender: "babu", text: "Okay, noted!" }
+                  ],
+                }));
+              }}
+            >
+              Send
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
       <Navbar />
       <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
-        {/* <h1 className="text-3xl font-bold mb-6 text-center">Babu Dashboard</h1> */}
-
         <Tabs defaultValue="jobs-avail">
           <TabsList className="bg-white p-2 rounded-lg shadow-md flex gap-4">
             <TabsTrigger value="jobs-avail" className="relative">
@@ -75,14 +137,13 @@ function Babu() {
           <TabsContent value="jobs-avail">
             <ul className="space-y-4">
               {jobs.map((job, index) => {
-                const client = clientData.find((c) => c.id === job.clientId); // Fetch client details
+                const client = clientData.find((c) => c.id === job.clientId);
 
                 return (
                   <li key={index} className="bg-gray-100 p-4 rounded-lg shadow">
                     <div className="flex justify-between items-center">
-                      <span className="font-semibold ">{job.services}</span>
+                      <span className="font-semibold">{job.services}</span>
                       <Button
-                      
                         variant="outline"
                         onClick={() => setExpandedJob(expandedJob === job.services ? null : job.services)}
                       >
@@ -90,7 +151,6 @@ function Babu() {
                       </Button>
                     </div>
 
-                    {/* Show client details when expanded */}
                     {expandedJob === job.services && client && (
                       <div className="mt-4 bg-white p-4 rounded-lg shadow">
                         <p><strong>Name:</strong> {client.name}</p>
@@ -124,7 +184,10 @@ function Babu() {
               <ul className="space-y-4">
                 {acceptedJobs.map((job, index) => (
                   <li key={index} className="bg-green-100 p-4 rounded-lg shadow">
-                    <p className="text-lg font-semibold">{job.service} - Accepted ✅</p>
+                    <div className="flex justify-between items-center">
+                      <p className="text-lg font-semibold">{job.service} - Accepted ✅</p>
+                      <Button variant="outline" onClick={() => setSelectedChat(job.service)}>Chat</Button>
+                    </div>
                     <div className="mt-2 text-gray-700">
                       <p><strong>Name:</strong> {job.client.name}</p>
                       <p><strong>Mobile:</strong> {job.client.mobile_no}</p>
