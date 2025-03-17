@@ -1,5 +1,6 @@
 import { useState } from "react";
-import  Link  from "next/link";
+import Link from "next/link";
+import { X } from "lucide-react"; // Import close icon
 
 interface SignupFormProps {
   onBack: () => void;
@@ -40,6 +41,10 @@ export default function SignupForm({ onBack }: SignupFormProps) {
           </div>
         ) : (
           <div>
+            {/* Close Icon */}
+        <button onClick={onBack} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
+          <X size={24} />
+        </button>
             <h3 className="text-lg font-semibold mb-4">
               Signup as {role.charAt(0).toUpperCase() + role.slice(1)}
             </h3>
@@ -145,11 +150,11 @@ export default function SignupForm({ onBack }: SignupFormProps) {
               </button>
             </form>
             <p className="mt-4 text-gray-700">
-  Already have an account?{" "}
-  <Link href="" className="text-blue-500 hover:underline">
-    Log In
-  </Link>
-</p>
+              Already have an account?{" "}
+              <Link href="" className="text-blue-500 hover:underline">
+                Log In
+              </Link>
+            </p>
             <button className="mt-4 text-blue-500" onClick={() => setRole("")}>
               Back to Role Selection
             </button>
