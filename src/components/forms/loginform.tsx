@@ -19,6 +19,8 @@ export default function LoginForm({ onBack }: LoginFormProps) {
           <input type="text" placeholder="Email or Phone No" className="w-full p-3 border rounded mb-4" />
           <input type="password" placeholder="Password" className="w-full p-3 border rounded mb-4" />
           <Button className="w-full bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 cursor-pointer">Log In</Button>
+          <div className="bg-slate-300 h-[2px] mt-4"></div>
+          
         </form>
       </div>
     </div>
