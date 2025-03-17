@@ -42,9 +42,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
         ) : (
           <div>
             {/* Close Icon */}
-        <button onClick={onBack} className="absolute top-3 right-3 text-gray-500 hover:text-gray-800">
-          <X size={24} />
-        </button>
+        
             <h3 className="text-lg font-semibold mb-4">
               Signup as {role.charAt(0).toUpperCase() + role.slice(1)}
             </h3>
