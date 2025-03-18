@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/app/db/index";
 import { users } from "@/app/db/schema";
 import bcrypt from "bcrypt";
+import { eq } from "drizzle-orm"; // ✅ Import Drizzle's 'eq' helper
 
 export async function POST(req: NextRequest) {
   try {
@@ -12,8 +13,8 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "All fields are required" }, { status: 400 });
     }
 
-    // Check if the email already exists
-    const existingUser = await db.select().from(users).where(users.email.eq(email)).execute();
+    // ✅ Check if the email already exists
+    const existingUser = await db.select().from(users).where(eq(users.email, email));
     if (existingUser.length > 0) {
       return NextResponse.json({ error: "Email already in use" }, { status: 409 });
     }
