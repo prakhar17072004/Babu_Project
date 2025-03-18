@@ -1,5 +1,5 @@
 import { X } from "lucide-react"; // Import close icon
-import { Button } from "../ui/button";
+import { Button } from "./ui/button";
 
 interface LoginFormProps {
   onBack: () => void; // Function to handle closing
