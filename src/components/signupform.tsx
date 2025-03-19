@@ -132,7 +132,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
               </div>
 
               <div className="mb-4">
-                <label className="block font-semibold">Mobile Number <span className="text-red-500">*</span></label>
+                <label className="block font-semibold">Mobile Number <span className="text-red-600">*</span></label>
                 <input
                   type="text"
                   name="mobile_number"
