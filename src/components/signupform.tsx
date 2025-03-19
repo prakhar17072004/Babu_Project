@@ -145,7 +145,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
               </div>
 
               <div className="mb-4">
-                <label className="block font-semibold">Password <span className="text-red-500">*</span></label>
+                <label className="block font-semibold">Password <span className="text-red-400">*</span></label>
                 <input
                   type="password"
                   name="password"
