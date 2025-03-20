@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Link from "next/link";
-import { X } from "lucide-react"; // Import close icon
+import { X } from "lucide-react";
 
 interface SignupFormProps {
   onBack: () => void;
@@ -15,7 +15,8 @@ export default function SignupForm({ onBack }: SignupFormProps) {
     mobile_number: "",
     password: "",
     confirmPassword: "",
-    extraField: "",
+    babu_id: "",
+    admin_code: "",
   });
 
   const [loading, setLoading] = useState(false);
@@ -47,7 +48,8 @@ export default function SignupForm({ onBack }: SignupFormProps) {
           mobile_number: formData.mobile_number,
           password: formData.password,
           role,
-          extraField: formData.extraField, // Optional field for babu/admin
+          babu_id: role === "babu" ? formData.babu_id : undefined,
+          admin_code: role === "admin" ? formData.admin_code : undefined,
         }),
       });
 
@@ -87,9 +89,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
           </div>
         ) : (
           <div>
-            <h3 className="text-lg font-semibold mb-4">
-              Signup as {role.charAt(0).toUpperCase() + role.slice(1)}
-            </h3>
+            <h3 className="text-lg font-semibold mb-4">Signup as {role.charAt(0).toUpperCase() + role.slice(1)}</h3>
             <form className="text-left" onSubmit={handleSubmit}>
               <div className="flex gap-2">
                 <div className="mb-4 w-1/2">
@@ -144,41 +144,15 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                 />
               </div>
 
-              <div className="mb-4">
-                <label className="block font-semibold">Password <span className="text-red-500">*</span></label>
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Enter your password"
-                  className="w-full p-3 border rounded"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label className="block font-semibold">Confirm Password <span className="text-red-500">*</span></label>
-                <input
-                  type="password"
-                  name="confirmPassword"
-                  placeholder="Confirm password"
-                  className="w-full p-3 border rounded"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-
               {role === "babu" && (
                 <div className="mb-4">
                   <label className="block font-semibold">Babu ID <span className="text-red-500">*</span></label>
                   <input
                     type="text"
-                    name="extraField"
+                    name="babu_id"
                     placeholder="Enter Babu ID"
                     className="w-full p-3 border rounded"
-                    value={formData.extraField}
+                    value={formData.babu_id}
                     onChange={handleChange}
                     required
                   />
@@ -190,37 +164,21 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   <label className="block font-semibold">Admin Code <span className="text-red-500">*</span></label>
                   <input
                     type="text"
-                    name="extraField"
+                    name="admin_code"
                     placeholder="Enter Admin Code"
                     className="w-full p-3 border rounded"
-                    value={formData.extraField}
+                    value={formData.admin_code}
                     onChange={handleChange}
                     required
                   />
                 </div>
               )}
-
+              
               {error && <p className="text-red-500">{error}</p>}
-
-              <button
-                type="submit"
-                className="w-full bg-blue-500 text-white p-3 rounded-lg"
-                disabled={loading}
-              >
+              <button type="submit" className="w-full bg-blue-500 text-white p-3 rounded-lg" disabled={loading}>
                 {loading ? "Signing up..." : "Signup"}
               </button>
             </form>
-
-            <p className="mt-4 text-gray-700">
-              Already have an account?{" "}
-              <Link href="/login" className="text-blue-500 hover:underline">
-                Log In
-              </Link>
-            </p>
-
-            <button className="mt-4 text-blue-500" onClick={() => setRole("")}>
-              Back to Role Selection
-            </button>
           </div>
         )}
       </div>
