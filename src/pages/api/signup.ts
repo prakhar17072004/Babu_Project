@@ -38,7 +38,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(400).json({ error: "Invalid role specified" });
     }
 
-    return res.status(201).json({ message: `${role} registered successfully` });
+    return res.status(201).json({ message: `${role.charAt(0).toUpperCase() + role.slice(1)} registered successfully` });
+
 
   } catch (error) {
     console.error("Signup Error:", error);
