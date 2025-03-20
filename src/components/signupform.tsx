@@ -189,10 +189,10 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                 </label>
                 <input
                   type="password"
-                  name="confirm Password"
-                  placeholder="Enter your password"
+                  name="confirmPassword"
+                  placeholder="Confirm password"
                   className="w-full p-3 border rounded"
-                  value={formData.password}
+                  value={formData.confirmPassword}
                   onChange={handleChange}
                   required
                   pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
