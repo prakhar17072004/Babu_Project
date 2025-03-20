@@ -1,6 +1,4 @@
-import { useState } from "react";
-import Link from "next/link";
-import { X } from "lucide-react";
+import { useState } from "react"; import Link from "next/link"; import { X } from "lucide-react"; // Import close icon
 
 interface SignupFormProps {
   onBack: () => void;
@@ -94,90 +92,50 @@ export default function SignupForm({ onBack }: SignupFormProps) {
               <div className="flex gap-2">
                 <div className="mb-4 w-1/2">
                   <label className="block font-semibold">First Name <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    name="first_name"
-                    placeholder="First name"
-                    className="w-full p-3 border rounded"
-                    value={formData.first_name}
-                    onChange={handleChange}
-                    required
-                  />
+                  <input type="text" name="first_name" placeholder="First name" className="w-full p-3 border rounded" value={formData.first_name} onChange={handleChange} required />
                 </div>
                 <div className="mb-4 w-1/2">
                   <label className="block font-semibold">Last Name <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    name="last_name"
-                    placeholder="Last name"
-                    className="w-full p-3 border rounded"
-                    value={formData.last_name}
-                    onChange={handleChange}
-                    required
-                  />
+                  <input type="text" name="last_name" placeholder="Last name" className="w-full p-3 border rounded" value={formData.last_name} onChange={handleChange} required />
                 </div>
               </div>
 
               <div className="mb-4">
                 <label className="block font-semibold">Email <span className="text-red-500">*</span></label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  className="w-full p-3 border rounded"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
+                <input type="email" name="email" placeholder="Enter your email" className="w-full p-3 border rounded" value={formData.email} onChange={handleChange} required />
               </div>
 
               <div className="mb-4">
                 <label className="block font-semibold">Mobile Number <span className="text-red-500">*</span></label>
-                <input
-                  type="text"
-                  name="mobile_number"
-                  placeholder="Enter your phone number"
-                  className="w-full p-3 border rounded"
-                  value={formData.mobile_number}
-                  onChange={handleChange}
-                  required
-                />
+                <input type="text" name="mobile_number" placeholder="Enter your phone number" className="w-full p-3 border rounded" value={formData.mobile_number} onChange={handleChange} required />
+              </div>
+
+              <div className="mb-4">
+                <label className="block font-semibold">Password <span className="text-red-500">*</span></label>
+                <input type="password" name="password" placeholder="Enter your password" className="w-full p-3 border rounded" value={formData.password} onChange={handleChange} required />
+              </div>
+
+              <div className="mb-4">
+                <label className="block font-semibold">Confirm Password <span className="text-red-500">*</span></label>
+                <input type="password" name="confirmPassword" placeholder="Confirm password" className="w-full p-3 border rounded" value={formData.confirmPassword} onChange={handleChange} required />
               </div>
 
               {role === "babu" && (
                 <div className="mb-4">
                   <label className="block font-semibold">Babu ID <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    name="babu_id"
-                    placeholder="Enter Babu ID"
-                    className="w-full p-3 border rounded"
-                    value={formData.babu_id}
-                    onChange={handleChange}
-                    required
-                  />
+                  <input type="text" name="babu_id" placeholder="Enter Babu ID" className="w-full p-3 border rounded" value={formData.babu_id} onChange={handleChange} required />
                 </div>
               )}
 
               {role === "admin" && (
                 <div className="mb-4">
                   <label className="block font-semibold">Admin Code <span className="text-red-500">*</span></label>
-                  <input
-                    type="text"
-                    name="admin_code"
-                    placeholder="Enter Admin Code"
-                    className="w-full p-3 border rounded"
-                    value={formData.admin_code}
-                    onChange={handleChange}
-                    required
-                  />
+                  <input type="text" name="admin_code" placeholder="Enter Admin Code" className="w-full p-3 border rounded" value={formData.admin_code} onChange={handleChange} required />
                 </div>
               )}
-              
+
               {error && <p className="text-red-500">{error}</p>}
-              <button type="submit" className="w-full bg-blue-500 text-white p-3 rounded-lg" disabled={loading}>
-                {loading ? "Signing up..." : "Signup"}
-              </button>
+              <button type="submit" className="w-full bg-blue-500 text-white p-3 rounded-lg" disabled={loading}>{loading ? "Signing up..." : "Signup"}</button>
             </form>
           </div>
         )}
