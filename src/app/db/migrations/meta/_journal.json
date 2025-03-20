@@ -15,6 +15,13 @@
       "when": 1741978077409,
       "tag": "0001_slow_sumo",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1742466200618,
+      "tag": "0002_talented_catseye",
+      "breakpoints": true
     }
   ]
 }

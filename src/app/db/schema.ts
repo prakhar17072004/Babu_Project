@@ -8,7 +8,7 @@ export const users = pgTable("users", {
   email: varchar("email", { length: 100 }).notNull().unique(),
   mobile_number: varchar("mobile_number", { length: 15 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
-  role: varchar("role", { length: 20 }).notNull(), // Can be "user", "babu", or "admin"
+  role: varchar("role", { length: 200 }).notNull(), // Can be "user", "babu", or "admin"
 });
 
 // Babus Table (Specific details for Babu role)
