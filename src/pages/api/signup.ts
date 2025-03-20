@@ -33,7 +33,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       await db.insert(babus).values({ first_name, last_name, email, mobile_number, password: hashedPassword, role, babu_id });
     } else if (role === "admin") {
       if (!admin_code) return res.status(400).json({ error: "admin_code is required" });
-      await db.insert(admins).values({ first_name, last_name, email, mobile_number, password: hashedPassword, role, admin_code });
+      await db.insert(admins).values({ first_name, last_name, email, mobile_number, password: hashedPassword,role, admin_code });
     } else {
       return res.status(400).json({ error: "Invalid role specified" });
     }
