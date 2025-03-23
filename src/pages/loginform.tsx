@@ -1,8 +1,9 @@
 // LoginForm.tsx
 import { X } from "lucide-react";
-import { Button } from "./ui/button";
+import { Button } from "../components/ui/button";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import '../app/globals'
 
 interface LoginFormProps {
   onBack: () => void;
