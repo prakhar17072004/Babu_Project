@@ -30,7 +30,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
       if (response.ok) {
         const data = await response.json();
         console.log(data.message); // Log the success message
-        localStorage.setItem("user", JSON.stringify(data.user));
+        // Removing localStorage.setItem("user", JSON.stringify(data.user));
         router.push('/')
       } else {
         const errorData = await response.json();
