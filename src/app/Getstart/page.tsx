@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
-import SignupForm from "../../components/signupform";
-import LoginForm from "../../components/loginform";
+import SignupForm from "../../pages/signupform";
+import LoginForm from "../../pages/loginform";
 import Navbar from "@/components/Navbar";
 
 export default function GetStarted() {

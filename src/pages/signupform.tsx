@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react"; // Import close icon
-import "../app/globals"
+import "../app/globals.css"
 
 interface SignupFormProps {
   onBack: () => void;
