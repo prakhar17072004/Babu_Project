@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
+import SideBar from "../../components/Sidebar"
 import servicesData from "../../Data/data.json";
 import userData from "../../Data/user.json";
 
@@ -82,6 +83,7 @@ function User() {
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
+
         <div className="p-6 flex flex-col flex-grow">
           <div className="flex items-center justify-between border-b pb-4">
             <Button onClick={() => setSelectedChat(null)}>⬅ Back</Button>
@@ -120,6 +122,7 @@ function User() {
     <div>
       <Navbar />
       <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
+        {/* <SideBar/> */}
         {/* Tabs for Services */}
         <Tabs defaultValue="services-avail">
           <TabsList className="bg-white p-2 rounded-lg shadow-md">
