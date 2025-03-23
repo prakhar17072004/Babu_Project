@@ -7,7 +7,7 @@ function Navbar() {
   return (
     <div className="fixed top-0 left-0 w-full h-[60px] bg-slate-500 flex items-center justify-between px-8 z-50 shadow-md">
       {/* Dashboard Link (Left) */}
-      <Link href="/">
+      <Link href="/Getstart">
         <h1 className="text-2xl font-semibold cursor-pointer  text-white">Dashboard</h1>
       </Link>
 
