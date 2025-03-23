@@ -19,7 +19,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/getAll", { // Updated API endpoint
+      const response = await fetch("/api/getAll", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -29,9 +29,17 @@ export default function LoginForm({ onBack }: LoginFormProps) {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data.message); // Log the success message
-        // Removing localStorage.setItem("user", JSON.stringify(data.user));
-        router.push('/')
+        console.log(data.message);
+
+        if (role === "user") {
+          router.push("/User");
+        } else if (role === "babu") {
+          router.push("/Babu");
+        } else if (role === "admin") {
+          router.push("/Admin");
+        } else {
+          router.push("/"); // Default fallback
+        }
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Login failed");
