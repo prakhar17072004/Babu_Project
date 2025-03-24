@@ -165,6 +165,10 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   className="w-full p-3 border rounded"
                   value={formData.mobile_number}
                   onChange={handleChange}
+                  pattern="\d{10}"
+                  minLength={10}
+                  maxLength={10}
+                  title="Phone number must be exactly 10 digits"
                   required
                 />
               </div>
