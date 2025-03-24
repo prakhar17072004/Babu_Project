@@ -16,11 +16,11 @@ function Navbar() {
       <div className="flex items-center space-x-2">
         <Location />
         <div className="flex space-x-4">
-          <Link href="/loginform">
+          {/* <Link href="/loginform">
           <Button className="bg-green-500 text-white transition-all duration-500 transform hover:bg-green-600 hover:scale-110">
             Log In
           </Button>
-          </Link>
+          </Link> */}
           <Link href="/Getstart">
           <Button className="bg-blue-500 text-white transition-all duration-500 transform hover:bg-blue-600 hover:scale-110">
             Get Started
