@@ -2,13 +2,14 @@ import React from 'react';
 import Link from 'next/link';
 import Location from './Location';
 import { Button } from './ui/button';
+import  Profile  from './Profile';
 
 
 function Navbar() {
   return (
     <div className="fixed top-0 left-0 w-full h-[60px] bg-slate-500 flex items-center justify-between px-8 z-50 shadow-md">
       {/* Dashboard Link (Left) */}
-      <Link href="/Getstart">
+      <Link href="/">
         <h1 className="text-2xl font-semibold cursor-pointer  text-white">Dashboard</h1>
       </Link>
 
@@ -26,8 +27,11 @@ function Navbar() {
             Get Started
           </Button>
           </Link>
+          {/* Profile Section (Right) */}
+          <Profile />
         </div>
       </div>
+      
     </div>
   );
 }

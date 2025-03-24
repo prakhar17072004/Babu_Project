@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
-import SideBar from "../../components/Sidebar"
+import SideBar from "../../components/Profile"
 import servicesData from "../../Data/data.json";
 import userData from "../../Data/user.json";
 
