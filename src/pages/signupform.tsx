@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react"; // Import close icon
-import "../app/globals.css"
+import "../app/globals.css";
 
 interface SignupFormProps {
   onBack: () => void;
@@ -148,6 +148,8 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   className="w-full p-3 border rounded"
                   value={formData.email}
                   onChange={handleChange}
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                  title="Please enter a valid email address"
                   required
                 />
               </div>
