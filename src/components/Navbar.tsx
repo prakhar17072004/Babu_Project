@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Location from './Location';
 import { Button } from './ui/button';
-// import  Profile  from './Profile';
+
 
 
 function Navbar() {
@@ -27,8 +27,7 @@ function Navbar() {
             Get Started
           </Button>
           </Link>
-          {/* Profile Section (Right) */}
-          {/* <Profile /> */}
+          
         </div>
       </div>
       
