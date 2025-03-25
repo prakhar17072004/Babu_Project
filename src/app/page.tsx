@@ -14,7 +14,7 @@ export default function Home() {
         <Link href="/Getstart">
           <Button className='bg-green-800'>Getstarted</Button>
         </Link>
-        {/* <p className="text-lg mb-8">
+        <p className="text-lg mb-8">
           Manage records for Users,Babus and Admin.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
@@ -39,7 +39,7 @@ export default function Home() {
             <h2 className="text-2xl font-semibold mb-2">Admin &rarr;</h2>
             <p>View and manage admin records.</p>
           </Link>
-        </div> */}
+        </div>
       </div>
     
     </>
