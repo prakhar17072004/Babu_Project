@@ -148,8 +148,8 @@ export default function SignupForm({ onBack }: SignupFormProps) {
                   className="w-full p-3 border rounded"
                   value={formData.email}
                   onChange={handleChange}
-                  // pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
-                  // title="Please enter a valid email address"
+                  pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+                  title="Please enter a valid email address"
                   required
                 />
               </div>
