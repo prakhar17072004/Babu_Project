@@ -58,7 +58,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Signup failed");
 
-      toast.success("Login successful!"); // Show success toast
+      toast.success("Signup successful!"); // Show success toast
       setRole("");
     } catch (err: any) {
       setError(err.message);
