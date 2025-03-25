@@ -2,6 +2,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react"; // Import close icon
 import "../app/globals.css";
+import { toast } from "react-hot-toast";
 
 interface SignupFormProps {
   onBack: () => void;
@@ -57,7 +58,7 @@ export default function SignupForm({ onBack }: SignupFormProps) {
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || "Signup failed");
 
-      alert("User registered successfully!");
+      toast.success("Login successful!"); // Show success toast
       setRole("");
     } catch (err: any) {
       setError(err.message);
