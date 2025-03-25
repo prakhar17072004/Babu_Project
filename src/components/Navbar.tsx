@@ -5,7 +5,11 @@ import Location from './Location';
 import { Button } from './ui/button';
 import Profile from './Profile';
 
-function Navbar() {
+interface NavbarProps {
+  isLoggedIn: boolean; // Add a prop to indicate login status
+}
+
+function Navbar({ isLoggedIn }: NavbarProps) {
   return (
     <div className="fixed top-0 left-0 w-full h-[60px] bg-slate-500 flex items-center justify-between px-8 z-50 shadow-md">
       <Link href="/">
@@ -21,10 +25,8 @@ function Navbar() {
             </Button>
           </Link>
         </div>
-        <Profile />
+        {isLoggedIn && <Profile />} {/* Conditionally render Profile */}
       </div>
-
-      
     </div>
   );
 }
