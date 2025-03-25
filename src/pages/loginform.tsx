@@ -1,9 +1,11 @@
 // LoginForm.tsx
 import { X } from "lucide-react";
 import { Button } from "../components/ui/button";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
-import '../app/globals.css'
+import '../app/globals.css';
+import { LoginContext } from "../components/LoginContext"; // Import the context
+import { toast } from "react-hot-toast";
 
 interface LoginFormProps {
   onBack: () => void;
@@ -15,6 +17,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
   const [role, setRole] = useState("user");
   const [error, setError] = useState("");
   const router = useRouter();
+  const { setIsLoggedIn } = useContext(LoginContext); // Access setIsLoggedIn
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,6 +34,8 @@ export default function LoginForm({ onBack }: LoginFormProps) {
       if (response.ok) {
         const data = await response.json();
         console.log(data.message);
+        setIsLoggedIn(true); // Update login status
+        toast.success("Login successful!"); // Show success toast
 
         if (role === "user") {
           router.push("/User");
@@ -39,15 +44,17 @@ export default function LoginForm({ onBack }: LoginFormProps) {
         } else if (role === "admin") {
           router.push("/Admin");
         } else {
-          router.push("/"); // Default fallback
+          router.push("/");
         }
       } else {
         const errorData = await response.json();
         setError(errorData.error || "Login failed");
+        toast.error(errorData.error || "Login failed"); // Show error toast
       }
     } catch (err) {
       console.error("Login error:", err);
       setError("Login failed");
+      toast.error("Login failed"); // Show error toast
     }
   };
 

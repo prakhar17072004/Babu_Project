@@ -4,12 +4,11 @@ import Link from 'next/link';
 import Location from './Location';
 import { Button } from './ui/button';
 import Profile from './Profile';
+import { useLoginStatus } from './LoginContext'; // Import the context
 
-interface NavbarProps {
-  isLoggedIn: boolean; // Add a prop to indicate login status
-}
+function Navbar() {
+  const { isLoggedIn } = useLoginStatus(); // Access isLoggedIn from context
 
-function Navbar({ isLoggedIn }: NavbarProps) {
   return (
     <div className="fixed top-0 left-0 w-full h-[60px] bg-slate-500 flex items-center justify-between px-8 z-50 shadow-md">
       <Link href="/">
@@ -25,7 +24,7 @@ function Navbar({ isLoggedIn }: NavbarProps) {
             </Button>
           </Link>
         </div>
-        {isLoggedIn && <Profile />} {/* Conditionally render Profile */}
+         <Profile />
       </div>
     </div>
   );
