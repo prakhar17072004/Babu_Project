@@ -1,4 +1,5 @@
 // Navbar.tsx
+"use client"
 import React from 'react';
 import Link from 'next/link';
 import Location from './Location';
@@ -8,6 +9,7 @@ import { useLoginStatus } from './LoginContext'; // Import the context
 
 function Navbar() {
   const { isLoggedIn } = useLoginStatus(); // Access isLoggedIn from context
+  console.log("Navbar isLoggedIn:", isLoggedIn); // Check the value
 
   return (
     <div className="fixed top-0 left-0 w-full h-[60px] bg-slate-500 flex items-center justify-between px-8 z-50 shadow-md">

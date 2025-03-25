@@ -20,6 +20,7 @@ function Profile() {
 
   const handleProfileClick = () => {
     setIsProfileOpen(true);
+    console.log("Profile component rendered");
   };
 
   const closeProfile = () => {

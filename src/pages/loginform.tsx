@@ -36,6 +36,8 @@ export default function LoginForm({ onBack }: LoginFormProps) {
         console.log(data.message);
         setIsLoggedIn(true); // Update login status
         toast.success("Login successful!"); // Show success toast
+        console.log("Login successful. setIsLoggedIn(true) called.");
+     // Check the value
 
         if (role === "user") {
           router.push("/User");
