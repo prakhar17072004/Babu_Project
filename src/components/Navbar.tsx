@@ -24,7 +24,7 @@ function Navbar() {
             </Button>
           </Link>
         </div>
-         <Profile />
+        {isLoggedIn && <Profile />}
       </div>
     </div>
   );
