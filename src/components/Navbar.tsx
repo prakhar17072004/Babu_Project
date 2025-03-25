@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Location from './Location';
 import { Button } from './ui/button';
-import { UserCircle } from 'lucide-react'; 
+
 
 
 function Navbar() {
@@ -27,9 +27,7 @@ function Navbar() {
             Get Started
           </Button>
           </Link>
-          <Link href="/profile">
-          <UserCircle className="w-8 h-8 text-white cursor-pointer hover:scale-110 transition-all duration-300" />
-        </Link>
+          
           
         </div>
       </div>
