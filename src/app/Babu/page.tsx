@@ -76,10 +76,10 @@ function Babu() {
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
         <div className="p-6 flex flex-col flex-grow">
-          <div className="flex justify-between border-b pb-4">
+          <div className="flex justify-between border-b pb-4 mt-[4%]">
             <div>
               <Button onClick={() => setSelectedChat(null)}>⬅ Back</Button>
-              <h1 className="text-xl font-semibold">Chat for {selectedChat}</h1>
+              <h1 className="text-xl font-semibold"> {selectedChat}</h1>
               <p>Babu Name: {babuInfo.name}</p>
               <p>Babu Mobile: {babuInfo.mobile}</p>
             </div>
