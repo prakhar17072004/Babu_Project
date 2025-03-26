@@ -1,14 +1,11 @@
-// _app.tsx or _app.js
-import '../app/globals.css'; // Or your global CSS import
-import { LoginProvider } from '../components/LoginContext';
+import '../app/globals.css'; // Ensure this path is correct
+import { LoginProvider } from '@/components/LoginContext';
 import type { AppProps } from 'next/app';
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <LoginProvider>
       <Component {...pageProps} />
     </LoginProvider>
   );
 }
-
-export default MyApp;
