@@ -26,7 +26,9 @@ function User() {
     messages: { sender: "user" | "babu"; text: string }[];
     status: string; // Added status field
   }[]>([]);
-
+  
+  console.log(fetchUser());
+  
   useEffect(() => {
     if (userData.length > 0) {
       setFormData({
