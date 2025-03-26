@@ -27,7 +27,7 @@ function User() {
     status: string; // Added status field
   }[]>([]);
   
-  console.log(fetchUser());
+  
   
   useEffect(() => {
     if (userData.length > 0) {
