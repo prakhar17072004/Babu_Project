@@ -7,9 +7,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
-// import SideBar from "../../components/Profile"
 import servicesData from "../../Data/data.json";
-import userData from "../../Data/user.json";
+import userData from "../../Data/data.json";
 
 function User() {
   const [open, setOpen] = useState(false);
@@ -19,19 +18,21 @@ function User() {
   const [formData, setFormData] = useState({
     username: "",
     mobile: "",
+    babu_name:"",
   });
 
-  const [appliedServices, setAppliedServices] = useState<{ 
-    serviceName: string; 
-    messages: { sender: "user" | "babu"; text: string }[] 
+  const [appliedServices, setAppliedServices] = useState<{
+    serviceName: string;
+    messages: { sender: "user" | "babu"; text: string }[];
+    status: string; // Added status field
   }[]>([]);
 
-  // Set user data when component mounts
   useEffect(() => {
     if (userData.length > 0) {
       setFormData({
         username: userData[0].name || "",
         mobile: userData[0].mobile_no || "",
+        babu_name:userData[0].babu_name|| "",
       });
     }
   }, []);
@@ -49,7 +50,7 @@ function User() {
     if (selectedService) {
       setAppliedServices((prev) => [
         ...prev,
-        { serviceName: selectedService, messages: [] },
+        { serviceName: selectedService, messages: [], status: "Pending" }, // Initial status
       ]);
       toast.success(`${selectedService} Form submitted successfully!`);
     }
@@ -69,39 +70,59 @@ function User() {
     setAppliedServices((prev) =>
       prev.map((service) =>
         service.serviceName === selectedChat
-          ? { 
-              ...service, 
-              messages: [...service.messages, { sender: "user", text: messageInput }, { sender: "babu", text: "Okay, noted!" }]
+          ? {
+              ...service,
+              messages: [
+                ...service.messages,
+                { sender: "user", text: messageInput },
+                { sender: "babu", text: "Okay, noted!" },
+              ],
             }
           : service
       )
     );
-    setMessageInput(""); // Clear input after sending
+    setMessageInput("");
   };
 
   if (selectedChat) {
+    const currentService = appliedServices.find((s) => s.serviceName === selectedChat);
+
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
 
         <div className="p-6 flex flex-col flex-grow">
-          <div className="flex items-center justify-between border-b pb-4">
-            <Button onClick={() => setSelectedChat(null)}>⬅ Back</Button>
-            <h1 className="text-xl font-semibold">Chat for {selectedChat}</h1>
+          <div className="flex justify-between border-b pb-4 mt-10">
+            <div >
+              <Button onClick={() => setSelectedChat(null)}>⬅ Back</Button>
+              <h1 className="text-xl font-semibold">{selectedChat}</h1>
+              <p>Name: {formData.username}</p>
+              <p>Mobile: {formData.mobile}</p>
+            </div>
+            <div className="mt-[2%]">
+              <p>Status: {currentService?.status || "Unknown"}</p>
+              <p>Babu Name: {formData.babu_name}</p>
+              <p>Babu Mobile: 9876543210</p>
+            </div>
           </div>
 
-          {/* Chat Messages */}
           <div className="flex-grow overflow-y-auto p-4 space-y-2">
-            {appliedServices.find((s) => s.serviceName === selectedChat)?.messages.map((msg, index) => (
-              <div key={index} className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
-                <div className={`p-3 rounded-lg max-w-xs ${msg.sender === "user" ? "bg-blue-200" : "bg-gray-200"}`}>
+            {currentService?.messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`flex ${msg.sender === "user" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`p-3 rounded-lg max-w-xs ${
+                    msg.sender === "user" ? "bg-blue-200" : "bg-gray-200"
+                  }`}
+                >
                   {msg.text}
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Chat Input */}
           <div className="flex gap-2 p-4 border-t">
             <Input
               id="message"
@@ -122,19 +143,19 @@ function User() {
     <div>
       <Navbar />
       <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
-        {/* <SideBar/> */}
-        {/* Tabs for Services */}
         <Tabs defaultValue="services-avail">
           <TabsList className="bg-white p-2 rounded-lg shadow-md">
             <TabsTrigger value="services-avail">Services Available</TabsTrigger>
             <TabsTrigger value="services-apply">Applied Services</TabsTrigger>
           </TabsList>
 
-          {/* Available Services List */}
           <TabsContent value="services-avail">
             <ul className="space-y-4">
               {servicesData.map((service, index) => (
-                <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+                <li
+                  key={index}
+                  className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow"
+                >
                   <span className="font-semibold">{service.services}</span>
                   <Button
                     variant="outline"
@@ -142,16 +163,21 @@ function User() {
                       setSelectedService(service.services);
                       setOpen(true);
                     }}
-                    disabled={appliedServices.some((applied) => applied.serviceName === service.services)}
+                    disabled={appliedServices.some(
+                      (applied) => applied.serviceName === service.services
+                    )}
                   >
-                    {appliedServices.some((applied) => applied.serviceName === service.services) ? "Applied" : "Apply"}
+                    {appliedServices.some(
+                      (applied) => applied.serviceName === service.services
+                    )
+                      ? "Applied"
+                      : "Apply"}
                   </Button>
                 </li>
               ))}
             </ul>
           </TabsContent>
 
-          {/* Applied Services List */}
           <TabsContent value="services-apply">
             {appliedServices.length > 0 ? (
               <ul className="space-y-4">
@@ -172,7 +198,6 @@ function User() {
         </Tabs>
       </div>
 
-      {/* Apply Modal */}
       {open && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
