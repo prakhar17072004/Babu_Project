@@ -59,8 +59,8 @@ function Babu() {
         ...prev,
         [selectedChat]: [
           ...(prev[selectedChat] || []),
-          { sender: "user", text: messageInput },
-          { sender: "babu", text: "Okay, noted!" },
+          { sender: "babu", text: messageInput },
+          { sender: "user", text: "Okay, noted!" },
         ],
       }));
       setMessageInput(""); // Clear input field
@@ -69,13 +69,26 @@ function Babu() {
 
   // If a chat is selected, show chat UI
   if (selectedChat) {
+    const currentJob = acceptedJobs.find((job) => job.service === selectedChat);
+    const babuInfo = { name: "Babu Ji", mobile: "9876543210" }; // Hardcoded Babu info
+
     return (
       <div className="min-h-screen flex flex-col bg-gray-50">
         <Navbar />
         <div className="p-6 flex flex-col flex-grow">
-          <div className="flex items-center justify-between border-b pb-4">
-            <Button onClick={() => setSelectedChat(null)}>⬅ Back</Button>
-            <h1 className="text-xl font-semibold">Chat for {selectedChat}</h1>
+          <div className="flex justify-between border-b pb-4">
+            <div>
+              <Button onClick={() => setSelectedChat(null)}>⬅ Back</Button>
+              <h1 className="text-xl font-semibold">Chat for {selectedChat}</h1>
+              <p>Babu Name: {babuInfo.name}</p>
+              <p>Babu Mobile: {babuInfo.mobile}</p>
+            </div>
+            {currentJob && (
+              <div>
+                <p>Client Name: {currentJob.client.name}</p>
+                <p>Client Mobile: {currentJob.client.mobile_no}</p>
+              </div>
+            )}
           </div>
 
           {/* Chat Messages */}
@@ -111,6 +124,7 @@ function Babu() {
       </div>
     );
   }
+
 
   return (
     <div>
