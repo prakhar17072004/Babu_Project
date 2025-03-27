@@ -1,4 +1,5 @@
-import { pgTable, serial, varchar, integer } from "drizzle-orm/pg-core";
+import { pgTable, serial, varchar, text, integer, timestamp, check } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 // Users Table (Common for all roles)
 export const users = pgTable("users", {
@@ -34,3 +35,39 @@ export const admins = pgTable("admins", {
   role: varchar("role", { length: 20 }).notNull(), // Can be "user", "babu", or "admin"
   admin_code: varchar("admin_code", { length: 20 }).notNull(), // Unique Admin Code
 });
+
+
+// Applied Services Table
+export const appliedServices = pgTable(
+  "applied_services",
+  {
+    id: serial("id").primaryKey(),
+    serviceName: varchar("service_name", { length: 255 }).notNull(),
+    userName: varchar("user_name", { length: 255 }).notNull(),
+    userMobile: varchar("user_mobile", { length: 20 }).notNull(),
+    userDetails: text("user_details"),
+    babuName: varchar("babu_name", { length: 255 }).notNull(),
+    babuMobile: varchar("babu_mobile", { length: 20 }).notNull(),
+    status: varchar("status", { length: 20 }).notNull().default("Pending"),
+    appliedAt: timestamp("applied_at").defaultNow(),
+  },
+  (table) => ({
+    statusCheck: sql`CHECK (${table.status} IN ('Pending', 'Approved', 'Rejected', 'Completed'))`, // ✅ Correct way to add CHECK constraint
+  })
+);
+// Messages Table
+export const messages = pgTable(
+  "messages",
+  {
+    id: serial("id").primaryKey(),
+    serviceId: integer("service_id")
+      .notNull()
+      .references(() => appliedServices.id, { onDelete: "cascade" }),
+    sender: varchar("sender", { length: 20 }).notNull(),
+    message: text("message").notNull(),
+    sentAt: timestamp("sent_at").defaultNow(),
+  },
+  (table) => ({
+    senderCheck: sql`CHECK (${table.sender} IN ('user', 'babu'))`, // ✅ Correct way to enforce sender constraint
+  })
+);
