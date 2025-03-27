@@ -152,11 +152,11 @@ function User() {
       {/* Chat Box Modal */}
       {selectedChat && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-[400px]">
-            <h2 className="text-lg font-semibold mb-4">Chat for {selectedChat.serviceName}</h2>
+          <div className="bg-white p-6 rounded-lg shadow-lg ">
+            <h2 className="text-lg font-bold mb-4"> {selectedChat.serviceName}</h2>
             <div className="flex justify-between">
               <div className="text-left">
-                <p><strong>Service:</strong> {selectedChat.serviceName}</p>
+                {/* <p><strong>Service:</strong> {selectedChat.serviceName}</p> */}
                 <p><strong>User:</strong> {selectedChat.userName}</p>
                 <p><strong>Mobile:</strong> {selectedChat.userMobile}</p>
               </div>
