@@ -1,5 +1,7 @@
-import { pgTable, serial, varchar, text, integer, timestamp, check } from "drizzle-orm/pg-core";
-import { sql } from "drizzle-orm";
+import { pgTable, serial, varchar, text, integer, timestamp, pgEnum} from "drizzle-orm/pg-core";
+
+export const senderEnum = pgEnum("sender_enum", ["user", "babu"]);
+export const statusEnum = pgEnum("status_enum", ["Pending", "Approved", "Rejected", "Completed"]);
 
 // Users Table (Common for all roles)
 export const users = pgTable("users", {
@@ -38,36 +40,24 @@ export const admins = pgTable("admins", {
 
 
 // Applied Services Table
-export const appliedServices = pgTable(
-  "applied_services",
-  {
-    id: serial("id").primaryKey(),
-    serviceName: varchar("service_name", { length: 255 }).notNull(),
-    userName: varchar("user_name", { length: 255 }).notNull(),
-    userMobile: varchar("user_mobile", { length: 20 }).notNull(),
-    userDetails: text("user_details"),
-    babuName: varchar("babu_name", { length: 255 }).notNull(),
-    babuMobile: varchar("babu_mobile", { length: 20 }).notNull(),
-    status: varchar("status", { length: 20 }).notNull().default("Pending"),
-    appliedAt: timestamp("applied_at").defaultNow(),
-  },
-  (table) => ({
-    statusCheck: sql`CHECK (${table.status} IN ('Pending', 'Approved', 'Rejected', 'Completed'))`, // ✅ Correct way to add CHECK constraint
-  })
-);
+export const appliedServices = pgTable("applied_services", {
+  id: serial("id").primaryKey(),
+  serviceName: varchar("service_name", { length: 255 }).notNull(),
+  userName: varchar("user_name", { length: 255 }).notNull(),
+  userMobile: varchar("user_mobile", { length: 20 }).notNull(),
+  userDetails: text("user_details"),
+  babuName: varchar("babu_name", { length: 255 }).notNull(),
+  babuMobile: varchar("babu_mobile", { length: 20 }).notNull(),
+  status: statusEnum("status").notNull().default("Pending"), // ✅ Fixed
+  appliedAt: timestamp("applied_at").defaultNow(),
+});
 // Messages Table
-export const messages = pgTable(
-  "messages",
-  {
-    id: serial("id").primaryKey(),
-    service_id: integer("service_id")
-      .notNull()
-      .references(() => appliedServices.id, { onDelete: "cascade" }),
-    sender: varchar("sender", { length: 20 }).notNull(),
-    message: text("message").notNull(),
-    sentAt: timestamp("sent_at").defaultNow(),
-  },
-  (table) => ({
-    senderCheck: sql`CHECK (${table.sender} IN ('user', 'babu'))`, // ✅ Correct way to enforce sender constraint
-  })
-);
+export const messages = pgTable("messages", {
+  id: serial("id").primaryKey(),
+  serviceId: integer("service_id")
+    .notNull()
+    .references(() => appliedServices.id, { onDelete: "cascade" }),
+  sender: senderEnum("sender").notNull(), // ✅ Corrected
+  message: text("message").notNull(),
+  sentAt: timestamp("sent_at").defaultNow(),
+});

@@ -1,3 +1,5 @@
+CREATE TYPE "public"."sender_enum" AS ENUM('user', 'babu');--> statement-breakpoint
+CREATE TYPE "public"."status_enum" AS ENUM('Pending', 'Approved', 'Rejected', 'Completed');--> statement-breakpoint
 CREATE TABLE "admins" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"first_name" varchar(50) NOT NULL,
@@ -19,7 +21,7 @@ CREATE TABLE "applied_services" (
 	"user_details" text,
 	"babu_name" varchar(255) NOT NULL,
 	"babu_mobile" varchar(20) NOT NULL,
-	"status" varchar(20) DEFAULT 'Pending' NOT NULL,
+	"status" "status_enum" DEFAULT 'Pending' NOT NULL,
 	"applied_at" timestamp DEFAULT now()
 );
 --> statement-breakpoint
@@ -40,7 +42,7 @@ CREATE TABLE "babus" (
 CREATE TABLE "messages" (
 	"id" serial PRIMARY KEY NOT NULL,
 	"service_id" integer NOT NULL,
-	"sender" varchar(20) NOT NULL,
+	"sender" "sender_enum" NOT NULL,
 	"message" text NOT NULL,
 	"sent_at" timestamp DEFAULT now()
 );

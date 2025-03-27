@@ -1,5 +1,5 @@
 {
-  "id": "d3740964-728a-4d66-8470-0c979c3aeed0",
+  "id": "0687faf3-78d6-41f8-8153-d2578454b1b7",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -128,7 +128,8 @@
         },
         "status": {
           "name": "status",
-          "type": "varchar(20)",
+          "type": "status_enum",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true,
           "default": "'Pending'"
@@ -250,7 +251,8 @@
         },
         "sender": {
           "name": "sender",
-          "type": "varchar(20)",
+          "type": "sender_enum",
+          "typeSchema": "public",
           "primaryKey": false,
           "notNull": true
         },
@@ -361,7 +363,26 @@
       "isRLSEnabled": false
     }
   },
-  "enums": {},
+  "enums": {
+    "public.sender_enum": {
+      "name": "sender_enum",
+      "schema": "public",
+      "values": [
+        "user",
+        "babu"
+      ]
+    },
+    "public.status_enum": {
+      "name": "status_enum",
+      "schema": "public",
+      "values": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Completed"
+      ]
+    }
+  },
   "schemas": {},
   "sequences": {},
   "roles": {},
