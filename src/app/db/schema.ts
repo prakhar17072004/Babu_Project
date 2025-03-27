@@ -60,7 +60,7 @@ export const messages = pgTable(
   "messages",
   {
     id: serial("id").primaryKey(),
-    serviceId: integer("service_id")
+    service_id: integer("service_id")
       .notNull()
       .references(() => appliedServices.id, { onDelete: "cascade" }),
     sender: varchar("sender", { length: 20 }).notNull(),

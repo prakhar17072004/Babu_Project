@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { db } from "@/db/drizzle";
-import { appliedServices } from "@/db/schema";
+import { db } from "@/app/db/index";
+import { appliedServices } from "@/app/db/schema";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {

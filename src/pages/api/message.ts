@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { db } from "@/db/drizzle";
-import { messages } from "@/db/schema";
+import { db } from "@/app/db/index";
+import { messages } from "@/app/db/schema";
+import {eq} from "drizzle-orm";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "GET") {
@@ -11,9 +12,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
 
       const messagesData = await db
-        .select()
-        .from(messages)
-        .where(messages.serviceId.equals(Number(serviceId)));
+  .select()
+  .from(messages)
+  .where(eq(messages.service_id, Number(serviceId))); // ✅ Correct usage
 
       res.status(200).json({ messages: messagesData });
     } catch (error) {
@@ -21,13 +22,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   } else if (req.method === "POST") {
     try {
-      const { serviceId, sender, message } = req.body;
+      const { service_id, sender, message } = req.body;
 
-      if (!serviceId || !sender || !message) {
+      if (!service_id || !sender || !message) {
         return res.status(400).json({ error: "Missing required fields" });
       }
 
-      await db.insert(messages).values({ serviceId, sender, message });
+      await db.insert(messages).values({ service_id, sender, message });
 
       res.status(201).json({ message: "Message Sent" });
     } catch (error) {
