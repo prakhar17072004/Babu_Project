@@ -14,7 +14,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       const messagesData = await db
   .select()
   .from(messages)
-  .where(eq(messages.service_id, Number(serviceId))); // ✅ Correct usage
+  .where(eq(messages.serviceId, Number(serviceId))); // ✅ Correct usage
 
       res.status(200).json({ messages: messagesData });
     } catch (error) {
@@ -22,13 +22,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
   } else if (req.method === "POST") {
     try {
-      const { service_id, sender, message } = req.body;
+      const { serviceId, sender, message } = req.body;
 
-      if (!service_id || !sender || !message) {
+      if (!serviceId || !sender || !message) {
         return res.status(400).json({ error: "Missing required fields" });
       }
 
-      await db.insert(messages).values({ service_id, sender, message });
+      await db.insert(messages).values({ serviceId, sender, message });
 
       res.status(201).json({ message: "Message Sent" });
     } catch (error) {
