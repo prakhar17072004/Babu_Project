@@ -1,5 +1,5 @@
 {
-  "id": "190c73a1-096e-4272-b933-5a90cb0114e5",
+  "id": "d3740964-728a-4d66-8470-0c979c3aeed0",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -16,31 +16,37 @@
         },
         "first_name": {
           "name": "first_name",
-          "type": "varchar(25)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
         "last_name": {
           "name": "last_name",
-          "type": "varchar(25)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "varchar(20)",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
         "mobile_number": {
           "name": "mobile_number",
-          "type": "varchar(10)",
+          "type": "varchar(15)",
           "primaryKey": false,
           "notNull": true
         },
         "password": {
           "name": "password",
           "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(20)",
           "primaryKey": false,
           "notNull": true
         },
@@ -74,6 +80,75 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.applied_services": {
+      "name": "applied_services",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "service_name": {
+          "name": "service_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_name": {
+          "name": "user_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_mobile": {
+          "name": "user_mobile",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_details": {
+          "name": "user_details",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "babu_name": {
+          "name": "babu_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "babu_mobile": {
+          "name": "babu_mobile",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Pending'"
+        },
+        "applied_at": {
+          "name": "applied_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.babus": {
       "name": "babus",
       "schema": "",
@@ -86,31 +161,37 @@
         },
         "first_name": {
           "name": "first_name",
-          "type": "varchar(25)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
         "last_name": {
           "name": "last_name",
-          "type": "varchar(25)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "varchar(20)",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
         "mobile_number": {
           "name": "mobile_number",
-          "type": "varchar(10)",
+          "type": "varchar(15)",
           "primaryKey": false,
           "notNull": true
         },
         "password": {
           "name": "password",
           "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(20)",
           "primaryKey": false,
           "notNull": true
         },
@@ -151,6 +232,64 @@
       "checkConstraints": {},
       "isRLSEnabled": false
     },
+    "public.messages": {
+      "name": "messages",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "service_id": {
+          "name": "service_id",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sender": {
+          "name": "sender",
+          "type": "varchar(20)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "message": {
+          "name": "message",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sent_at": {
+          "name": "sent_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": false,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "messages_service_id_applied_services_id_fk": {
+          "name": "messages_service_id_applied_services_id_fk",
+          "tableFrom": "messages",
+          "tableTo": "applied_services",
+          "columnsFrom": [
+            "service_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
     "public.users": {
       "name": "users",
       "schema": "",
@@ -163,25 +302,25 @@
         },
         "first_name": {
           "name": "first_name",
-          "type": "varchar(25)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
         "last_name": {
           "name": "last_name",
-          "type": "varchar(25)",
+          "type": "varchar(50)",
           "primaryKey": false,
           "notNull": true
         },
         "email": {
           "name": "email",
-          "type": "varchar(20)",
+          "type": "varchar(100)",
           "primaryKey": false,
           "notNull": true
         },
         "mobile_number": {
           "name": "mobile_number",
-          "type": "varchar(10)",
+          "type": "varchar(15)",
           "primaryKey": false,
           "notNull": true
         },
@@ -193,7 +332,7 @@
         },
         "role": {
           "name": "role",
-          "type": "varchar(10)",
+          "type": "varchar(200)",
           "primaryKey": false,
           "notNull": true
         }
