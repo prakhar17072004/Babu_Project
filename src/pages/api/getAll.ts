@@ -1,9 +1,15 @@
-// pages/api/login.ts
 import { NextApiRequest, NextApiResponse } from "next";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 import { db } from "@/app/db/index";
 import { users, babus, admins } from "@/app/db/schema";
 import { eq } from "drizzle-orm";
-import bcrypt from 'bcrypt'; // Import bcrypt
+
+const SECRET_KEY = process.env.JWT_SECRET as string;
+
+if (!SECRET_KEY) {
+  throw new Error("JWT_SECRET is not defined in environment variables");
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -34,18 +40,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (!user || user.length === 0) {
-        return res.status(401).json({ error: "User not found" });
+      return res.status(401).json({ error: "User not found" });
     }
 
     const storedHashedPassword = user[0].password;
     const passwordMatch = await bcrypt.compare(password, storedHashedPassword);
 
-    if (passwordMatch) {
-      const { password: hashedPassword, ...userData } = user[0]; // Destructure and omit password
-      return res.status(200).json({ message: "Login successful", user: userData });
-    } else {
+    if (!passwordMatch) {
       return res.status(401).json({ error: "Invalid password" });
     }
+
+    // Generate JWT Token
+    const token = jwt.sign({ email: user[0].email, role: user[0].role }, SECRET_KEY, { expiresIn: "1h" });
+
+    const { password: _, ...userData } = user[0]; // Exclude password from response
+
+    return res.status(200).json({
+      message: "Login successful",
+      token,
+      user: userData,
+    });
 
   } catch (error) {
     console.error("Error logging in:", error);

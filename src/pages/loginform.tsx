@@ -1,12 +1,11 @@
 // LoginForm.tsx
-import { X } from "lucide-react";
+import { X, Loader2 } from "lucide-react";
 import { Button } from "../components/ui/button";
 import { useState, useContext } from "react";
 import { useRouter } from "next/navigation";
-import '../app/globals.css';
+import "../app/globals.css";
 import { LoginContext } from "../components/LoginContext";
 import { toast } from "react-hot-toast";
-import { Loader2 } from "lucide-react"; // Import the loader icon
 
 interface LoginFormProps {
   onBack: () => void;
@@ -17,13 +16,13 @@ export default function LoginForm({ onBack }: LoginFormProps) {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("user");
   const [error, setError] = useState("");
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { setIsLoggedIn } = useContext(LoginContext);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
 
     try {
       const response = await fetch("/api/getAll", {
@@ -35,11 +34,10 @@ export default function LoginForm({ onBack }: LoginFormProps) {
       });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log(data.message);
+        const { token, message } = await response.json();
+        localStorage.setItem("token", token); // Store JWT token
         setIsLoggedIn(true);
-        toast.success("Login successful!");
-        console.log("Login successful. setIsLoggedIn(true) called.");
+        toast.success(message || "Login successful!");
 
         if (role === "user") {
           router.push("/User");
@@ -60,7 +58,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
       setError("Login failed");
       toast.error("Login failed");
     } finally {
-      setIsLoading(false); // Stop loading
+      setIsLoading(false);
     }
   };
 
@@ -99,13 +97,9 @@ export default function LoginForm({ onBack }: LoginFormProps) {
           <Button
             type="submit"
             className="w-full bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 cursor-pointer relative"
-            disabled={isLoading} // Disable button while loading
+            disabled={isLoading}
           >
-            {isLoading ? (
-              <Loader2 className="animate-spin  " />
-            ) : (
-              "Log In"
-            )}
+            {isLoading ? <Loader2 className="animate-spin" /> : "Log In"}
           </Button>
         </form>
 

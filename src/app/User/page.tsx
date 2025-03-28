@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "react-hot-toast";
 import servicesData from "../../Data/data.json";
+import { ArrowLeft, Send } from "lucide-react";
 
 function User() {
   const [open, setOpen] = useState(false);
@@ -15,6 +16,7 @@ function User() {
   const [selectedChat, setSelectedChat] = useState<any | null>(null);
   const [messageInput, setMessageInput] = useState("");
   const [appliedServices, setAppliedServices] = useState<any[]>([]);
+  const [messages, setMessages] = useState<{ sender: string; text: string }[]>([]);
   const [formData, setFormData] = useState({
     username: "",
     mobile: "",
@@ -51,7 +53,7 @@ function User() {
             serviceName: selectedService,
             userName: formData.username,
             userMobile: formData.mobile,
-            babuName: "Default Babu", // This should ideally be assigned dynamically
+            babuName: "Default Babu",
             babuMobile: "9876543210",
           }),
         });
@@ -72,117 +74,128 @@ function User() {
   // Open chat for an applied service
   const handleOpenChat = (service: any) => {
     setSelectedChat(service);
+    setMessages([
+      { sender: "user", text: "Hello, I need help with this service." },
+      { sender: "babu", text: "Sure! How can I assist you?" },
+    ]);
+  };
+
+  // Handle sending a message
+  const handleSendMessage = () => {
+    if (messageInput.trim() === "") return;
+
+    setMessages([...messages, { sender: "user", text: messageInput }]);
+    setMessageInput("");
+
+    // Simulating a reply after 1 second
+    setTimeout(() => {
+      setMessages((prev) => [...prev, { sender: "babu", text: "Okay, let me check that for you." }]);
+    }, 1000);
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      <div className="min-h-screen bg-gray-50 p-8 mt-[50px]">
-        <Tabs defaultValue="services-avail">
-          <TabsList className="bg-white p-2 rounded-lg shadow-md">
-            <TabsTrigger value="services-avail">Services Available</TabsTrigger>
-            <TabsTrigger value="services-apply">Applied Services</TabsTrigger>
-          </TabsList>
 
-          {/* Available Services - From JSON */}
-          <TabsContent value="services-avail">
-            <ul className="space-y-4">
-              {servicesData.map((service, index) => (
-                <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
-                  <span className="font-semibold">{service.services}</span>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      setSelectedService(service.services);
-                      setOpen(true);
-                    }}
-                    disabled={appliedServices.some((applied) => applied.serviceName === service.services)}
-                  >
-                    {appliedServices.some((applied) => applied.serviceName === service.services) ? "Applied" : "Apply"}
-                  </Button>
-                </li>
-              ))}
-            </ul>
-          </TabsContent>
+      {selectedChat ? (
+        // WhatsApp-Style Chat UI
+        <div className="flex flex-col h-screen bg-white shadow-md">
+          {/* Chat Header */}
+          <div className="flex items-center justify-between p-4 bg-slate-950 text-white mt-[4%]">
+            {/* Left Side - Service & User Info */}
+            <div>
+              <h2 className="text-lg font-semibold">{selectedChat.serviceName}</h2>
+              <p className="text-sm">UserName : {selectedChat.userName}</p>
+              <p className="text-sm">Mobile no: {selectedChat.userMobile}</p>
+            </div>
 
-          {/* Applied Services - From Database */}
-          <TabsContent value="services-apply">
-            {appliedServices.length > 0 ? (
+            {/* Right Side - Status & Babu Info */}
+            <div className="text-right">
+              <p className="text-sm">Status: {selectedChat.status}</p>
+              <p className="text-sm"> BabuName : {selectedChat.babuName} </p>
+              <p className="text-sm">Mobile no. :{selectedChat.babuMobile}</p>
+            </div>
+          </div>
+
+          {/* Chat Messages */}
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-100">
+            {messages.map((msg, index) => (
+              <div
+                key={index}
+                className={`max-w-xs p-3 rounded-lg ${
+                  msg.sender === "user"
+                    ? "bg-green-500 text-white ml-auto"
+                    : "bg-white text-gray-800"
+                }`}
+              >
+                {msg.text}
+              </div>
+            ))}
+          </div>
+
+          {/* Chat Input */}
+          <div className="p-4 bg-white flex items-center gap-2 border-t">
+            <Input
+              type="text"
+              placeholder="Type a message..."
+              value={messageInput}
+              onChange={(e) => setMessageInput(e.target.value)}
+              className="flex-1"
+            />
+            <Button onClick={handleSendMessage}>
+              <Send className="w-5 h-5" />
+            </Button>
+          </div>
+        </div>
+      ) : (
+        // Services UI
+        <div className="p-8 mt-[50px]">
+          <Tabs defaultValue="services-avail">
+            <TabsList className="bg-white p-2 rounded-lg shadow-md">
+              <TabsTrigger value="services-avail">Services Available</TabsTrigger>
+              <TabsTrigger value="services-apply">Applied Services</TabsTrigger>
+            </TabsList>
+
+            {/* Available Services - From JSON */}
+            <TabsContent value="services-avail">
               <ul className="space-y-4">
-                {appliedServices.map((service, index) => (
-                  <li
-                    key={index}
-                    className="flex justify-between items-center bg-green-100 p-4 rounded-lg shadow cursor-pointer"
-                    onClick={() => handleOpenChat(service)}
-                  >
-                    {service.serviceName} - {service.status}
+                {servicesData.map((service, index) => (
+                  <li key={index} className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+                    <span className="font-semibold">{service.services}</span>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        setSelectedService(service.services);
+                        setOpen(true);
+                      }}
+                      disabled={appliedServices.some((applied) => applied.serviceName === service.services)}
+                    >
+                      {appliedServices.some((applied) => applied.serviceName === service.services) ? "Applied" : "Apply"}
+                    </Button>
                   </li>
                 ))}
               </ul>
-            ) : (
-              <p className="text-gray-500 text-center">No services applied yet.</p>
-            )}
-          </TabsContent>
-        </Tabs>
-      </div>
+            </TabsContent>
 
-      {/* Modal for Applying a Service */}
-      {open && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-lg font-semibold mb-4">Apply for {selectedService}</h2>
-            <div className="space-y-4">
-              <div>
-                <Label htmlFor="username">Name</Label>
-                <Input id="username" type="text" value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} className="bg-gray-200" />
-              </div>
-              <div>
-                <Label htmlFor="mobile">Mobile No.</Label>
-                <Input id="mobile" type="text" value={formData.mobile} onChange={(e) => setFormData({ ...formData, mobile: e.target.value.replace(/\D/, "") })} className="bg-gray-200" />
-              </div>
-            </div>
-            <div className="flex justify-end mt-4 gap-2">
-              <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-              <Button onClick={handleSubmit}>Submit</Button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Chat Box Modal */}
-      {selectedChat && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg ">
-            <h2 className="text-lg font-bold mb-4"> {selectedChat.serviceName}</h2>
-            <div className="flex justify-between">
-              <div className="text-left">
-                {/* <p><strong>Service:</strong> {selectedChat.serviceName}</p> */}
-                <p><strong>User:</strong> {selectedChat.userName}</p>
-                <p><strong>Mobile:</strong> {selectedChat.userMobile}</p>
-              </div>
-              <div className="text-right">
-                <p><strong>Status:</strong> {selectedChat.status}</p>
-                <p><strong>Babu:</strong> {selectedChat.babuName}</p>
-                <p><strong>Mobile:</strong> {selectedChat.babuMobile}</p>
-              </div>
-            </div>
-
-            <div className="mt-4">
-              <Label htmlFor="message">Message</Label>
-              <Input
-                id="message"
-                type="text"
-                value={messageInput}
-                onChange={(e) => setMessageInput(e.target.value)}
-                className="bg-gray-200"
-              />
-            </div>
-            
-            <div className="flex justify-end mt-4 gap-2">
-              <Button variant="outline" onClick={() => setSelectedChat(null)}>Close</Button>
-              <Button>Send</Button>
-            </div>
-          </div>
+            {/* Applied Services - From Database */}
+            <TabsContent value="services-apply">
+              {appliedServices.length > 0 ? (
+                <ul className="space-y-4">
+                  {appliedServices.map((service, index) => (
+                    <li
+                      key={index}
+                      className="flex justify-between items-center bg-green-100 p-4 rounded-lg shadow cursor-pointer"
+                      onClick={() => handleOpenChat(service)}
+                    >
+                      {service.serviceName} - {service.status}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 text-center">No services applied yet.</p>
+              )}
+            </TabsContent>
+          </Tabs>
         </div>
       )}
     </div>
