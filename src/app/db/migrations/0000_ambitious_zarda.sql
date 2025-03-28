@@ -19,8 +19,7 @@ CREATE TABLE "applied_services" (
 	"user_name" varchar(255) NOT NULL,
 	"user_mobile" varchar(20) NOT NULL,
 	"user_details" text,
-	"babu_name" varchar(255) NOT NULL,
-	"babu_mobile" varchar(20) NOT NULL,
+	"babu_id" varchar(20) NOT NULL,
 	"status" "status_enum" DEFAULT 'Pending' NOT NULL,
 	"applied_at" timestamp DEFAULT now()
 );
@@ -59,4 +58,5 @@ CREATE TABLE "users" (
 	CONSTRAINT "users_mobile_number_unique" UNIQUE("mobile_number")
 );
 --> statement-breakpoint
+ALTER TABLE "applied_services" ADD CONSTRAINT "applied_services_babu_id_babus_babu_id_fk" FOREIGN KEY ("babu_id") REFERENCES "public"."babus"("babu_id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "messages" ADD CONSTRAINT "messages_service_id_applied_services_id_fk" FOREIGN KEY ("service_id") REFERENCES "public"."applied_services"("id") ON DELETE cascade ON UPDATE no action;

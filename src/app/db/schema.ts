@@ -46,11 +46,11 @@ export const appliedServices = pgTable("applied_services", {
   userName: varchar("user_name", { length: 255 }).notNull(),
   userMobile: varchar("user_mobile", { length: 20 }).notNull(),
   userDetails: text("user_details"),
-  babuName: varchar("babu_name", { length: 255 }).notNull(),
-  babuMobile: varchar("babu_mobile", { length: 20 }).notNull(),
-  status: statusEnum("status").notNull().default("Pending"), // ✅ Fixed
+  
+  status: statusEnum("status").notNull().default("Pending"),
   appliedAt: timestamp("applied_at").defaultNow(),
 });
+
 // Messages Table
 export const messages = pgTable("messages", {
   id: serial("id").primaryKey(),

@@ -6,9 +6,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { toast } from "react-hot-toast";
 import servicesData from "../../Data/data.json";
-import { ArrowLeft, Send } from "lucide-react";
+import { Send, ArrowLeft } from "lucide-react"; // Import back icon
 
 function User() {
   const [open, setOpen] = useState(false);
@@ -20,13 +21,13 @@ function User() {
   const [formData, setFormData] = useState({
     username: "",
     mobile: "",
+    details: "",
   });
 
   useEffect(() => {
     fetchAppliedServices();
   }, []);
 
-  // Fetch applied services from the database
   const fetchAppliedServices = async () => {
     try {
       const response = await fetch("/api/appliedservices");
@@ -37,10 +38,9 @@ function User() {
     }
   };
 
-  // Apply for a service
   const handleSubmit = async () => {
     if (!formData.username || !formData.mobile) {
-      toast.error("Please fill in the details.");
+      toast.error("Please fill in all details.");
       return;
     }
 
@@ -53,6 +53,7 @@ function User() {
             serviceName: selectedService,
             userName: formData.username,
             userMobile: formData.mobile,
+            userDetails: formData.details,
             babuName: "Default Babu",
             babuMobile: "9876543210",
           }),
@@ -62,8 +63,9 @@ function User() {
           toast.success(`${selectedService} applied successfully!`);
           fetchAppliedServices();
           setOpen(false);
+          setFormData({ username: "", mobile: "", details: "" });
         } else {
-          toast.error("Failed to apply service.");
+          toast.error("Failed to apply for service.");
         }
       } catch (error) {
         console.error("Error applying service:", error);
@@ -71,7 +73,6 @@ function User() {
     }
   };
 
-  // Open chat for an applied service
   const handleOpenChat = (service: any) => {
     setSelectedChat(service);
     setMessages([
@@ -80,14 +81,12 @@ function User() {
     ]);
   };
 
-  // Handle sending a message
   const handleSendMessage = () => {
     if (messageInput.trim() === "") return;
 
     setMessages([...messages, { sender: "user", text: messageInput }]);
     setMessageInput("");
 
-    // Simulating a reply after 1 second
     setTimeout(() => {
       setMessages((prev) => [...prev, { sender: "babu", text: "Okay, let me check that for you." }]);
     }, 1000);
@@ -100,20 +99,22 @@ function User() {
       {selectedChat ? (
         // WhatsApp-Style Chat UI
         <div className="flex flex-col h-screen bg-white shadow-md">
-          {/* Chat Header */}
+          {/* Chat Header with Back Button */}
           <div className="flex items-center justify-between p-4 bg-slate-950 text-white mt-[4%]">
-            {/* Left Side - Service & User Info */}
-            <div>
-              <h2 className="text-lg font-semibold">{selectedChat.serviceName}</h2>
-              <p className="text-sm">UserName : {selectedChat.userName}</p>
-              <p className="text-sm">Mobile no: {selectedChat.userMobile}</p>
+            <div className=" items-center gap-3">
+              <Button className="bg-green-700" variant="ghost" onClick={() => setSelectedChat(null)}>
+                <ArrowLeft className="  w-6 h-6 text-white" />Back
+              </Button>
+              <div>
+                <h2 className="text-lg font-semibold">{selectedChat.serviceName}</h2>
+                <p className="text-sm">UserName: {selectedChat.userName}</p>
+                <p className="text-sm">Mobile: {selectedChat.userMobile}</p>
+              </div>
             </div>
-
-            {/* Right Side - Status & Babu Info */}
             <div className="text-right">
               <p className="text-sm">Status: {selectedChat.status}</p>
-              <p className="text-sm"> BabuName : {selectedChat.babuName} </p>
-              <p className="text-sm">Mobile no. :{selectedChat.babuMobile}</p>
+              <p className="text-sm">BabuName: {selectedChat.babuName}</p>
+              <p className="text-sm">Mobile: {selectedChat.babuMobile}</p>
             </div>
           </div>
 
@@ -123,9 +124,7 @@ function User() {
               <div
                 key={index}
                 className={`max-w-xs p-3 rounded-lg ${
-                  msg.sender === "user"
-                    ? "bg-green-500 text-white ml-auto"
-                    : "bg-white text-gray-800"
+                  msg.sender === "user" ? "bg-green-500 text-white ml-auto" : "bg-white text-gray-800"
                 }`}
               >
                 {msg.text}
@@ -198,6 +197,23 @@ function User() {
           </Tabs>
         </div>
       )}
+
+      {/* Apply Service Modal */}
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Apply for {selectedService}</DialogTitle>
+          </DialogHeader>
+          <Label>Name</Label>
+          <Input value={formData.username} onChange={(e) => setFormData({ ...formData, username: e.target.value })} />
+          <Label>Mobile</Label>
+          <Input value={formData.mobile} onChange={(e) => setFormData({ ...formData, mobile: e.target.value })} />
+          <DialogFooter>
+            <Button onClick={() => setOpen(false)}>Cancel</Button>
+            <Button onClick={handleSubmit}>Submit</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

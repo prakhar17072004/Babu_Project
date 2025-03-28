@@ -1,5 +1,5 @@
 {
-  "id": "0687faf3-78d6-41f8-8153-d2578454b1b7",
+  "id": "51272080-2d15-41ba-8c27-df46c8c7973c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -114,14 +114,8 @@
           "primaryKey": false,
           "notNull": false
         },
-        "babu_name": {
-          "name": "babu_name",
-          "type": "varchar(255)",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "babu_mobile": {
-          "name": "babu_mobile",
+        "babu_id": {
+          "name": "babu_id",
           "type": "varchar(20)",
           "primaryKey": false,
           "notNull": true
@@ -143,7 +137,21 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {},
+      "foreignKeys": {
+        "applied_services_babu_id_babus_babu_id_fk": {
+          "name": "applied_services_babu_id_babus_babu_id_fk",
+          "tableFrom": "applied_services",
+          "tableTo": "babus",
+          "columnsFrom": [
+            "babu_id"
+          ],
+          "columnsTo": [
+            "babu_id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "policies": {},
