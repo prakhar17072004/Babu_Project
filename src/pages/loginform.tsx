@@ -86,7 +86,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
             onChange={(e) => setPassword(e.target.value)}
           />
           <select
-            className="w-full p-3 border rounded mb-4"
+            className="w-full p-4 border rounded mb-4"
             value={role}
             onChange={(e) => setRole(e.target.value)}
           >
