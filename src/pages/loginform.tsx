@@ -96,7 +96,7 @@ export default function LoginForm({ onBack }: LoginFormProps) {
           </select>
           <Button
             type="submit"
-            className="w-full bg-green-500 text-white p-3 rounded-lg hover:bg-green-600 cursor-pointer relative"
+            className="w-full bg-green-500 text-white p-3 rounded-lg hover:bg-green-700 cursor-pointer relative"
             disabled={isLoading}
           >
             {isLoading ? <Loader2 className="animate-spin" /> : "Log In"}
